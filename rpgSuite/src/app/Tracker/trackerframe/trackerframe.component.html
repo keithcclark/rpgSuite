@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 border">
+      <app-tracker></app-tracker>
+    </div>
+    <div class="col-sm-6">
+      <app-monstercard *ngIf="combatant.faction== 'Enemy'"></app-monstercard>
+      <app-herocard *ngIf="combatant.faction == 'Hero'"></app-herocard>
+    </div>
+    <div class="col-sm-3 border">
+      Dice Roller and Log
+    </div>
+  </div>
+</div>

@@ -1,0 +1,225 @@
+
+<!-- Display Monster -->
+<div class="container-fluid m-2" *ngIf="creature.name !==undefined">
+  <div class="card">
+    <!-- Basic info -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-2">
+          CR {{creature.challenge_rating.cr }}
+        </div>
+        <div class="col-sm-auto">
+          {{creature.challenge_rating.xp}}XP
+        </div>
+        <div class="col-sm-8"></div>
+      </div>
+      <h5 class="card-title text-uppercase">{{creature.name}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted font-italic">
+        {{creature.creature_size.creature_size}}
+        {{creature.creature_type.type}}
+        <!-- Subtype  -->
+        | {{creature.alignment.alignment}}</h6>
+      <!-- stats -->
+      <div class="text-center">
+        <table class="table table-sm">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">STR</th>
+              <th scope="col">DEX</th>
+              <th scope="col">CON</th>
+              <th scope="col">INT</th>
+              <th scope="col">WIS</th>
+              <th scope="col">CHA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope="row">{{creature.strength}}({{getMod(creature.strength)}})</td>
+              <td>{{creature.dexterity}}({{getMod(creature.dexterity)}})</td>
+              <td>{{creature.constitution}}({{getMod(creature.constitution)}})</td>
+              <td>{{creature.intelligence}}({{getMod(creature.intelligence)}})</td>
+              <td>{{creature.wisdom}}({{getMod(creature.wisdom)}})</td>
+              <td>{{creature.charisma}}({{getMod(creature.charisma)}})</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- container for HP | AC| Speed -->
+  <div class="container text-center acHpSpeed">
+    <div class="row ">
+      <div class="col-sm-4"><b>Armor Class:</b> {{creature.armor_class}}
+        <!-- <span *ngIf="creature.armor_class_type">armor type</span> -->
+      </div>
+      <div class="col-sm-4"><b>Hit Points:</b> {{creature.hit_points}} ({{creature.hit_dice}})</div>
+      <div class="col-sm-4"><b>Speed:</b> <span *ngFor="let speed of creature.speeds">{{speed.speed.speed}}
+          {{speed.distance}}, </span></div>
+    </div>
+  </div>
+  <hr />
+  <!-- Creature Behavior tabs -->
+  <ul class="nav nav-tabs mb-2" id="pills-tab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="pills-traits-tab" data-toggle="pill" href="#pills-traits" role="tab"
+        aria-controls="pills-traits" aria-selected="true">Traits</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="pills-actions-tab" data-toggle="pill" href="#pills-actions" role="tab"
+        aria-controls="pills-actions" aria-selected="false">Actions</a>
+    </li>
+    <li class="nav-item" *ngIf="creature.legendaryActions.length > 0">
+      <a class="nav-link" id="pill-legend-tab" data-toggle="pill" href="#pills-legend" role="tab"
+        aria-controls="pills-legend" aria-selected="false">Legendary</a>
+    </li>
+    <li class="nav-item" *ngIf="creature.lairActions">
+      <a class="nav-link" id="pills-lair-tab" data-toggle="pill" href="#pills-lair" role="tab"
+        aria-controls="pills-lair" aria-selected="false">Lair</a>
+    </li>
+  </ul>
+
+  <!-- Tab Contents-->
+  <div class="tab-content" id="pills-tabContent">
+    <!-- Traits Tab -->
+    <!-- Abilities  -->
+    <div class="tab-pane fade show active" id="pills-traits" role="tabpanel" aria-labelledby="pills-traits-tab">
+      <div class="container-fluid">
+        <!-- Skills -->
+        <span *ngIf="creature.skills"> <b><i>Skills: </i></b> <span
+            *ngFor="let skill of creature.skills">{{skill.skills.name}}:
+            {{skill.bonus}} , </span> <br /></span>
+        <!-- Damage Vulnerabilities -->
+        <span *ngIf="creature.damageVulnerability.length > 0"><b><i>Damage Vulnerabilities</i></b>:
+          <span *ngFor="let dvul of creature.damageVulnerability">{{dvul.name}}</span><br /></span>
+        <!-- Damage Resistance -->
+        <span *ngIf="creature.damageResistance.length > 0"><b><i>Damage Resistances</i></b>:
+          <span *ngFor="let dres of creature.damageResistance"> {{dres.name}} , </span><br /></span>
+        <!-- Damage Immunity -->
+        <span *ngIf="creature.damageImmunity.length > 0"><b><i>Damage Immunities</i></b>:
+          <span *ngFor="let dim of creature.damageImmunity"> {{dim.name}} , </span> <br /></span>
+        <!-- Condition Immunities -->
+        <span *ngIf="creature.conditionImmunity.length > 0"><b><i>ConditionImmunities</i></b>:
+          <span *ngFor="let cim of creature.conditionImmunity"> {{cim.name}} , </span><br /></span>
+        <!-- Senses -->
+        <b><i>Senses</i></b>: <span *ngFor="let sense of creature.senses">{{sense.sense.sense}} {{sense.distance}},
+        </span> <br />
+        <!-- Languages -->
+        <b><i>Languages</i></b>: <span *ngFor="let lang of creature.languages">{{lang.name}} , </span> <br />
+        <hr />
+      </div>
+      <!-- Traits  -->
+      <div class="container-fluid">
+        <div id="accordTrait" class="">
+          <span *ngFor="let trait of creature.traits; let i = index">
+            <div class=" ">
+              <div class="" [attr.id]="'trait'+i">
+                <h5 class="mb-0">
+                  <button class="btn btn-link text-dark" data-toggle="collapse" [attr.data-target]="'#collapseTrait'+i"
+                    aria-expanded="true" [attr.aria-controls]="'collapseTrait'+i">
+                    {{trait.name}}
+                  </button>
+                </h5>
+              </div>
+
+              <div [attr.id]="'collapseTrait'+i" class="collapse" [attr.aria-labelledby]="'trait'+i"
+                data-parent="#accordTrait">
+                <div class="container-fluid">
+                  {{trait.description}}
+                  <hr />
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- Action Tab -->
+    <!-- Actions-->
+    <div class="tab-pane fade" id="pills-actions" role="tabpanel" aria-labelledby="pills-actions-tab">
+      <!-- Actions-->
+      <div id="accordAction" class="">
+        <h6> Actions </h6>
+        <span *ngFor="let action of creature.actions; let i = index">
+          <div class="">
+            <div class="" [attr.id]="'action'+i">
+              <h5 class="mb-0">
+                <button class="btn btn-link text-dark" data-toggle="collapse" [attr.data-target]="'#collapseAction'+i"
+                  aria-expanded="true" [attr.aria-controls]="'collapseAction'+i">
+                  {{action.name}} <span *ngIf="action.attackBonus">+{{action.attackBonus}} |
+                    ( {{action.damageDice}}<span *ngIf="action.damageBonus"> + {{action.damageBonus}}</span> )</span>
+                </button>
+              </h5>
+            </div>
+
+            <div [attr.id]="'collapseAction'+i" class="collapse" [attr.aria-labelledby]="'action'+i"
+              data-parent="#accordAction">
+              <div class="container-fluid">
+                {{action.description}}
+                <hr />
+              </div>
+            </div>
+          </div>
+        </span>
+      </div>
+      <!-- Reactions -->
+      <span *ngIf="creature.reactions.length > 0">
+        <h6> Reactions </h6>
+        <div id="accordreaction" class="">
+          <span *ngFor="let reaction of creature.reactions; let k = index">
+            <div class="">
+              <div class="" [attr.id]="'reaction'+k">
+                <h5 class="mb-0">
+                  <button class="btn btn-link text-dark" data-toggle="collapse"
+                    [attr.data-target]="'#collapsereaction'+k" aria-expanded="true"
+                    [attr.aria-controls]="'collapsereaction'+k">
+                    {{reaction.name}}
+                  </button>
+                </h5>
+              </div>
+
+              <div [attr.id]="'collapsereaction'+k" class="collapse" [attr.aria-labelledby]="'reaction'+k"
+                data-parent="#accordreaction">
+                <div class="container-fluid">
+                  {{reaction.desc}}
+                  <hr />
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+      </span>
+    </div>
+    <!-- Legendary  Tab-->
+    <div class="tab-pane fade" id="pills-legend" role="tabpanel" aria-labelledby="pill-legend-tab">
+
+      <div id="accordLegend" class="">
+        The {{creature.name}} can take 3 legendary actions, choosing from the options below.
+        Only one legendary action option can be used at a time and only at the end of another creature's turn.
+        The {{creature.name}} regains spent legendary actions at the start of its turn.
+        <hr />
+        <span *ngFor="let legend of creature.legendaryActions; let i = index">
+          <div class="">
+            <div class="" [attr.id]="'leg'+i">
+              <h5 class="mb-0">
+                <button class="btn btn-link text-dark mt-0" data-toggle="collapse" [attr.data-target]="'#collapseLeg'+i"
+                  aria-expanded="true" [attr.aria-controls]="'collapseLeg'+i">
+                  {{legend.name}}
+                </button>
+              </h5>
+            </div>
+            <div [attr.id]="'collapseLeg'+i" class="collapse" [attr.aria-labelledby]="'leg'+i"
+              data-parent="#accordLegend">
+              <div class="container-fluid">
+                {{legend.description}}
+                <hr />
+              </div>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+    <!-- Lair  Tab-->
+    <div class="tab-pane fade" id="pills-lair" role="tabpanel" aria-labelledby="pill-lair-tab">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,166 @@
+<div class="container-fluid mt-2">
+  <!--Functionality for tracker  -->
+
+  <div class="input-group">
+    <button class="btn btn-dark mb-2 mr-5" (click)="openAdd(addcontent)">Add</button>
+    <div class="input-group-prepend">
+      <button class="btn btn-dark mb-2" (click)="cycleBackward()"><i class="fas fa-arrow-alt-circle-left"></i></button>
+    </div>
+    <div class="bg-dark px-3 pt-1 mb-2 text-light">
+      <h5>Round: {{round}}</h5>
+    </div>
+    <div class="input-group-append">
+      <button class="btn btn-dark mb-2" (click)="cycleForward()"><i class="fas fa-arrow-alt-circle-right"></i></button>
+    </div>
+  </div>
+  <div class="text-center">
+    
+  </div>
+
+
+  <!-- Display combatants -->
+  <div class="card  my-1" *ngFor="let combatant of combatants" (click)="displayCombatant(combatant)">
+    <div class="row">
+      <div class="col-3 mt-2">
+        <img src="{{combatant.image}}" height="60" width="80" *ngIf="combatant.image">
+        <i class="fab fa-optin-monster fa-5x" *ngIf="!combatant.image"></i>
+        <small class="form-text text-center"><strong>{{combatant.initiative}}</strong></small>
+      </div>
+      <div class="col-9">
+        <div class="card-body text-center">
+          <h5>{{combatant.name}}</h5>
+          <div class="row">
+            <div class="col-4 text-center">
+              <i class="fas fa-eye"></i>
+              <small class="form-text">{{combatant.senses[0].distance}} </small>
+            </div>
+            <div class="col-4 text-center">
+              <i class="fas fa-shield-alt"></i>
+              <small class="form-text">{{combatant.armor_class}}</small>
+            </div>
+            <div class="col-4 text-center">
+              <i class="fas fa-heart"></i>
+              <small class="form-text" [ngbPopover]=popContentHp [autoClose]="'outside'" placement="right"
+                (click)="openHpPopover(hp,combatant)" triggers="manual" #hp="ngbPopover">
+                {{combatant.combathp}}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- popover conter for adjusting hp -->
+<ng-template #popContentHp>
+  <input type="number" name="quantity" min="0" max="{{adjustMaxHP}}" value="{{adjustingHP}}"
+    (keydown.enter)="setCombatantHP(hp,newHP.value)" (keyup)="validateHPentered(newHP)" #newHP>
+</ng-template>
+
+<!-- Modal content to add combatant to initiative list -->
+<ng-template #addcontent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Add Combatant</h4>
+    <button type="button" class="btn btn-dark" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- What type of combatant -->
+    <select class="form-control form-control-lg" #faction>
+      <option>Monster</option>
+      <option>Players</option>
+    </select>
+    <!-- Add Monster -->
+    <div *ngIf="faction.value ==='Monster'">
+      <!-- Monster search by name -->
+      <div class="input-group input-group-lg  my-3">
+        <input type="text" class="form-control" placeholder="Monster Name" id="search" #search>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button"
+            (click)="searchMonsterByName(search.value)">Search</button>
+        </div>
+      </div>
+      <!-- No serch results found -->
+      <div class="container">
+        <div *ngIf="searchResults !== undefined && searchResults.length < 1">
+          No Results Found.
+        </div>
+        <!-- Results found -->
+        <div class="card" *ngFor="let search of searchResults">
+          <div class="card-body">
+            <div class="row">
+              <!-- Display name -->
+              <div class="col-3">
+                {{search.name}}
+              </div>
+              <!-- CR -->
+              <div class="col-2">
+                {{search.challenge_rating.cr }}
+              </div>
+              <!-- Creature Type -->
+              <div class="col-2">
+                {{search.creature_type.type}}
+              </div>
+              <!-- Creaute size -->
+              <div class="col-2">
+                {{search.creature_size.creature_size}}
+              </div>
+              <!-- Alignment -->
+              <div class="col-2">
+                {{search.alignment.alignment}}
+              </div>
+              <!-- Add combatant in row to array -->
+              <div class="col-1" (click)="enterMonsterCombatant(search.id)">
+                <i class="fas fa-plus-square"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add Player -->
+    <div class="mt-3" *ngIf="faction.value ==='Players'">
+      <form #playerForm ="ngForm">
+        <div class="form-group">
+          <label for="playerName">Player Name</label>
+          <input type="text" class="form-control" 
+            id="playerName" placeholder="Enter Name"
+            ngModel name="name">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-3">
+            <label for="initiative">Init Bonus</label>
+            <input type="number" class="form-control" 
+              id="initiative" placeholder="Initiative Bonus"
+              ngModel name="iniBonus">
+          </div>
+          <div class="form-group col-3">
+            <label for="passiveP">Passive Perception</label>
+            <input type="number" class="form-control" 
+              id="passiveP" placeholder="Passive Perception"
+              ngModel name="perception">
+          </div>
+          <div class="form-group col-3">
+            <label for="ac">Armor Class</label>
+            <input type="number" class="form-control" 
+              id="ac" placeholder="Armor Class"
+              ngModel name="ac">
+          </div>
+          <div class="form-group col-3">
+            <label for="hp">Hit Points</label>
+            <input type="number" class="form-control" 
+            id="hp" placeholder="Hit Points"
+            ngModel name="hp">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" (click)="enterPlayerCombatant(playerForm)">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-dark" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
