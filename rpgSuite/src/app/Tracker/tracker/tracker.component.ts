@@ -22,12 +22,20 @@ export class TrackerComponent implements OnInit {
   round = 1;
 
   // ************/
-  // for adjusting hp of creature in initiative queue
+  // for adjusting stats of creature in initiative queue
   // ************/
-  adjustingHP: number;
   adjustCreature: Monster;
-  adjustMaxHP: number;
   lastpopOver: any;
+  // hp
+  adjustingHP: number;
+  overMaxHP: boolean;
+  // ac
+  adjustingAC: number;
+  overMaxAC: boolean;
+  // passive perception
+  adjustingPP: number;
+  overMaxPP: boolean;
+
 
   constructor(private modalService: NgbModal,
     private monsterService: MonsterService,
@@ -54,6 +62,8 @@ export class TrackerComponent implements OnInit {
       combatant.initiative = Math.floor((combatant.dexterity - 10) / 2) + roll;
       // set the hit point pool to be used in combat to average value
       combatant.combathp = combatant.hit_points;
+      // set combat ac to start value to allow for fluctation
+      combatant.combatac = combatant.armor_class;
       // add combatant to array of combatants.
       this.combatants.push(combatant);
       // sort the array combatants with the highest in the 0 spot
@@ -82,7 +92,6 @@ export class TrackerComponent implements OnInit {
     };
 
     combatant.senses.push(sight);
-    console.log(combatant);
     const roll = Math.round(Math.random() * 19) + 1;
     // calculate dex mod and add to roll
     combatant.initiative = Math.floor((combatant.dexterity - 10) / 2) + roll;
@@ -142,6 +151,7 @@ export class TrackerComponent implements OnInit {
   // ********************/
   // Popover Functions
   // *******************/
+  // *********** HP ***********/
   // open the popover to adjust the hp of a combatant
   openHpPopover(popover: any, creature: Monster) {
     if (popover.isOpen()) {
@@ -149,7 +159,6 @@ export class TrackerComponent implements OnInit {
     } else {
       this.adjustingHP = creature.combathp;
       this.adjustCreature = creature;
-      this.adjustMaxHP = creature.hit_points;
       this.lastpopOver = popover;
       const hp = this.adjustingHP;
       popover.open({ hp });
@@ -158,13 +167,35 @@ export class TrackerComponent implements OnInit {
   // change the hp of selected combatant
   setCombatantHP(setValue: number) {
     this.adjustCreature.combathp = setValue;
-    this.lastpopOver.close();
-  }
-  validateHPentered(newHP: any) {
-    if (+newHP.value > +newHP.max) {
-      newHP.value = newHP.max;
+    // check to see if hp is over max value
+    if (+setValue > +this.adjustCreature.hit_points) {
+      this.overMaxHP = true;
+    } else {
+      this.overMaxHP = false;
     }
   }
 
-
+  // *********** AC ***********/
+  // open the popover to adjust the ac of a combatant
+  openAcPopover(popover: any, creature: Monster) {
+    if (popover.isOpen()) {
+      popover.close();
+    } else {
+      this.adjustingAC = creature.combatac;
+      this.adjustCreature = creature;
+      this.lastpopOver = popover;
+      const ac = this.adjustingAC;
+      popover.open({ ac });
+    }
+  }
+  // change the hp of selected combatant
+  setCombatantAC(setValue: number) {
+    this.adjustCreature.combatac = setValue;
+    // check to see if ac is over max value
+    if (+setValue > this.adjustCreature.armor_class) {
+      this.overMaxAC = true;
+    } else {
+      this.overMaxAC = false;
+    }
+  }
 }

@@ -30,9 +30,10 @@ export class Monster {
     skills = new Array<any>();
     image: Blob;
     // used in the front end;
+    faction: string;
     initiative: number;
     combathp: number;
-    faction: string;
+    combatac: number;
 }
 
 

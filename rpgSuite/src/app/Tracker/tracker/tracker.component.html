@@ -36,11 +36,14 @@
             </div>
             <div class="col-4 text-center">
               <i class="fas fa-shield-alt"></i>
-              <small class="form-text">{{combatant.armor_class}}</small>
+              <small class="form-text" [class.text-warning]="overMaxAC" [ngbPopover]=popContentAc [autoClose]="'outside'" placement="right"
+                (click)="openAcPopover(ac,combatant)" triggers="manual" #ac="ngbPopover">
+                {{combatant.combatac}}
+              </small>
             </div>
             <div class="col-4 text-center">
               <i class="fas fa-heart"></i>
-              <small class="form-text" [ngbPopover]=popContentHp [autoClose]="'outside'" placement="right"
+              <small class="form-text" [class.text-warning]="overMaxHP" [ngbPopover]=popContentHp [autoClose]="'outside'" placement="right"
                 (click)="openHpPopover(hp,combatant)" triggers="manual" #hp="ngbPopover">
                 {{combatant.combathp}}
               </small>
@@ -54,8 +57,14 @@
 
 <!-- popover conter for adjusting hp -->
 <ng-template #popContentHp>
-  <input type="number" name="quantity" min="0" max="{{adjustMaxHP}}" value="{{adjustingHP}}"
-    (keydown.enter)="setCombatantHP(hp,newHP.value)" (keyup)="validateHPentered(newHP)" #newHP>
+  <input type="number" name="hpValue" min="0" value="{{adjustingHP}}"
+    (keydown.enter)="setCombatantHP(newHP.value)" #newHP>
+</ng-template>
+
+<!-- popover conter for adjusting hp -->
+<ng-template #popContentAc>
+  <input type="number" name="acValue" min="0" value="{{adjustingAC}}"
+    (keydown.enter)="setCombatantAC(newAC.value)" #newAC>
 </ng-template>
 
 <!-- Modal content to add combatant to initiative list -->
