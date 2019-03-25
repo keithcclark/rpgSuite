@@ -19,7 +19,8 @@ export class MonsterService {
           const m: Monster = resp as Monster;
           return m;
         })
-        );}
+        );
+      }
   public searchName(name: string): Observable<Monster[]> {
     return this.http.get(environment.creatureUrl + '/name?name=' + name,
     {withCredentials: true}).pipe(map(

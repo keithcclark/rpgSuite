@@ -64,6 +64,8 @@ export class TrackerComponent implements OnInit {
       combatant.combathp = combatant.hit_points;
       // set combat ac to start value to allow for fluctation
       combatant.combatac = combatant.armor_class;
+      // set combat passive perception to allow for fluctation
+      combatant.combatpp = combatant.senses[0].distance;
       // add combatant to array of combatants.
       this.combatants.push(combatant);
       // sort the array combatants with the highest in the 0 spot
@@ -174,7 +176,6 @@ export class TrackerComponent implements OnInit {
       this.overMaxHP = false;
     }
   }
-
   // *********** AC ***********/
   // open the popover to adjust the ac of a combatant
   openAcPopover(popover: any, creature: Monster) {
@@ -188,7 +189,7 @@ export class TrackerComponent implements OnInit {
       popover.open({ ac });
     }
   }
-  // change the hp of selected combatant
+  // change the ac of selected combatant
   setCombatantAC(setValue: number) {
     this.adjustCreature.combatac = setValue;
     // check to see if ac is over max value
@@ -196,6 +197,29 @@ export class TrackerComponent implements OnInit {
       this.overMaxAC = true;
     } else {
       this.overMaxAC = false;
+    }
+  }
+  // *********** Passive Perception ***********/
+  // open the popover to adjust the passive perception of a combatant
+  openPpPopover(popover: any, creature: Monster) {
+    if (popover.isOpen()) {
+      popover.close();
+    } else {
+      this.adjustingPP = creature.combatpp;
+      this.adjustCreature = creature;
+      this.lastpopOver = popover;
+      const pp = this.adjustingPP;
+      popover.open({ pp });
+    }
+  }
+  // change the passive perception of selected combatant
+  setCombatantPP(setValue: number) {
+    this.adjustCreature.combatpp = setValue;
+    // check to see if ac is over max value
+    if (+setValue > this.adjustCreature.senses[0].distance) {
+      this.overMaxPP = true;
+    } else {
+      this.overMaxPP = false;
     }
   }
 }
