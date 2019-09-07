@@ -15,6 +15,9 @@ import { MonstercardComponent } from './monster/monstercard/monstercard.componen
 import { MonsterService } from './shared/services/monster.service';
 import { TrackerComponent } from './Tracker/tracker/tracker.component';
 import { TrackerframeComponent } from './tracker/trackerframe/trackerframe.component';
+import { TrackerCardComponent } from './Tracker/tracker/tracker-card/tracker-card.component';
+import { TrackerInfoComponent } from './Tracker/tracker/tracker-info/tracker-info.component';
+import { CombatantStatusComponent } from './Tracker/tracker/combatant-status/combatant-status.component';
 
 
 
@@ -27,7 +30,10 @@ import { TrackerframeComponent } from './tracker/trackerframe/trackerframe.compo
     HomeComponent,
     MonstercardComponent,
     TrackerComponent,
-    HerocardComponent
+    HerocardComponent,
+    TrackerCardComponent,
+    TrackerInfoComponent,
+    CombatantStatusComponent
   ],
   imports: [
     BrowserModule,

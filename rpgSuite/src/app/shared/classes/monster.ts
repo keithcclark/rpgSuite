@@ -20,7 +20,7 @@ export class Monster {
     traits = new Array<any>();
     actions = new Array<any>();
     reactions = new Array<any>();
-    legendaryActions= new Array<any>();
+    legendaryActions = new Array<any>();
     environments = new Array<any>();
     damageVulnerability = new Array<any>();
     damageResistance = new Array<any>();
@@ -30,9 +30,11 @@ export class Monster {
     skills = new Array<any>();
     image: Blob;
     // used in the front end;
+    faction: string;
     initiative: number;
     combathp: number;
-    faction: string;
+    combatac: number;
+    combatpp: number;
 }
 
 
