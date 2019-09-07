@@ -21,21 +21,6 @@ export class TrackerComponent implements OnInit {
   cycle = 0;
   round = 1;
 
-  // ************/
-  // for adjusting stats of creature in initiative queue
-  // ************/
-  adjustCreature: Monster;
-  lastpopOver: any;
-  // hp
-  adjustingHP: number;
-  overMaxHP: boolean;
-  // ac
-  adjustingAC: number;
-  overMaxAC: boolean;
-  // passive perception
-  adjustingPP: number;
-  overMaxPP: boolean;
-
 
   constructor(private modalService: NgbModal,
     private monsterService: MonsterService,
@@ -149,77 +134,5 @@ export class TrackerComponent implements OnInit {
     this.monsterService.searchName(name).subscribe(monsters => {
       this.searchResults = monsters;
     });
-  }
-  // ********************/
-  // Popover Functions
-  // *******************/
-  // *********** HP ***********/
-  // open the popover to adjust the hp of a combatant
-  openHpPopover(popover: any, creature: Monster) {
-    if (popover.isOpen()) {
-      popover.close();
-    } else {
-      this.adjustingHP = creature.combathp;
-      this.adjustCreature = creature;
-      this.lastpopOver = popover;
-      const hp = this.adjustingHP;
-      popover.open({ hp });
-    }
-  }
-  // change the hp of selected combatant
-  setCombatantHP(setValue: number) {
-    this.adjustCreature.combathp = setValue;
-    // check to see if hp is over max value
-    if (+setValue > +this.adjustCreature.hit_points) {
-      this.overMaxHP = true;
-    } else {
-      this.overMaxHP = false;
-    }
-  }
-  // *********** AC ***********/
-  // open the popover to adjust the ac of a combatant
-  openAcPopover(popover: any, creature: Monster) {
-    if (popover.isOpen()) {
-      popover.close();
-    } else {
-      this.adjustingAC = creature.combatac;
-      this.adjustCreature = creature;
-      this.lastpopOver = popover;
-      const ac = this.adjustingAC;
-      popover.open({ ac });
-    }
-  }
-  // change the ac of selected combatant
-  setCombatantAC(setValue: number) {
-    this.adjustCreature.combatac = setValue;
-    // check to see if ac is over max value
-    if (+setValue > this.adjustCreature.armor_class) {
-      this.overMaxAC = true;
-    } else {
-      this.overMaxAC = false;
-    }
-  }
-  // *********** Passive Perception ***********/
-  // open the popover to adjust the passive perception of a combatant
-  openPpPopover(popover: any, creature: Monster) {
-    if (popover.isOpen()) {
-      popover.close();
-    } else {
-      this.adjustingPP = creature.combatpp;
-      this.adjustCreature = creature;
-      this.lastpopOver = popover;
-      const pp = this.adjustingPP;
-      popover.open({ pp });
-    }
-  }
-  // change the passive perception of selected combatant
-  setCombatantPP(setValue: number) {
-    this.adjustCreature.combatpp = setValue;
-    // check to see if ac is over max value
-    if (+setValue > this.adjustCreature.senses[0].distance) {
-      this.overMaxPP = true;
-    } else {
-      this.overMaxPP = false;
-    }
   }
 }

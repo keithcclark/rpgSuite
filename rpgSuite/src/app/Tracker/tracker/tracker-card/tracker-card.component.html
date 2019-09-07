@@ -1,0 +1,46 @@
+<!--
+  Purpose: Card to insert in to tracker that holds basic info on the combatant. Provides a structure for display this info.
+-->
+<div class="card">
+  <!--Nameplate-->
+  <div class="row">
+    <div class="col">
+        <h5>{{combatant.name}}</h5>
+    </div>
+  </div>
+  <!--Image, Ini Roll, Info, Status-->
+  <div class="row">
+    <!--Image and Ini Roll-->
+    <div class="col-4">
+      <div class="row">
+        <!--Image-->
+        <div class="col">
+            <img src="{{combatant.image}}" height="60" width="80" *ngIf="combatant.image">
+            <i class="fab fa-optin-monster fa-5x" *ngIf="!combatant.image"></i>
+        </div>
+      </div>
+      <!--Ini Roll-->
+      <div class="row">
+          <div class="col-4">
+              <small class="form-text text-center"><strong>{{combatant.initiative}}</strong></small>
+          </div>
+      </div> 
+  </div>
+    <!--Info and Status-->
+    <div class="col -7">
+      <!--Info-->
+      <div class="row">
+        <div class="col">
+          <app-tracker-info [combatant]="combatant"></app-tracker-info>
+        </div>
+      </div>
+      <!--Status-->
+      <div class="row">
+        <div class="col">
+            <app-combatant-status></app-combatant-status>
+        </div>
+      </div>  
+    </div>
+  </div>
+
+</div>

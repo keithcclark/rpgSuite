@@ -19,62 +19,11 @@
 
 
   <!-- Display combatants -->
-  <div class="card  my-1" *ngFor="let combatant of combatants" (click)="displayCombatant(combatant)">
-    <div class="row">
-      <div class="col-3 mt-2">
-        <img src="{{combatant.image}}" height="60" width="80" *ngIf="combatant.image">
-        <i class="fab fa-optin-monster fa-5x" *ngIf="!combatant.image"></i>
-        <small class="form-text text-center"><strong>{{combatant.initiative}}</strong></small>
-      </div>
-      <div class="col-9">
-        <div class="card-body text-center">
-          <h5>{{combatant.name}}</h5>
-          <div class="row">
-            <div class="col-4 text-center">
-              <i class="fas fa-eye"></i>
-              <small class="form-text" [class.text-warning]="overMaxPP" [ngbPopover]=popContentPp [autoClose]="'outside'" placement="right"
-                (click)="openPpPopover(pp,combatant)" triggers="manual" #pp="ngbPopover">
-                {{combatant.combatpp}} 
-              </small>
-            </div>
-            <div class="col-4 text-center">
-              <i class="fas fa-shield-alt"></i>
-              <small class="form-text" [class.text-warning]="overMaxAC" [ngbPopover]=popContentAc [autoClose]="'outside'" placement="right"
-                (click)="openAcPopover(ac,combatant)" triggers="manual" #ac="ngbPopover">
-                {{combatant.combatac}}
-              </small>
-            </div>
-            <div class="col-4 text-center">
-              <i class="fas fa-heart"></i>
-              <small class="form-text" [class.text-warning]="overMaxHP" [ngbPopover]=popContentHp [autoClose]="'outside'" placement="right"
-                (click)="openHpPopover(hp,combatant)" triggers="manual" #hp="ngbPopover">
-                {{combatant.combathp}}
-              </small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="my-1" *ngFor="let combatant of combatants" (click)="displayCombatant(combatant)">
+    <app-tracker-card [combatant]="combatant"></app-tracker-card>
   </div>
 </div>
 
-<!-- popover contianer for adjusting hp -->
-<ng-template #popContentHp>
-  <input type="number" name="hpValue" min="0" value="{{adjustingHP}}"
-    (keydown.enter)="setCombatantHP(newHP.value)" #newHP>
-</ng-template>
-
-<!-- popover contianer for adjusting hp -->
-<ng-template #popContentAc>
-  <input type="number" name="acValue" value="{{adjustingAC}}"
-    (keydown.enter)="setCombatantAC(newAC.value)" #newAC>
-</ng-template>
-
-<!-- popover container for adjusting passive perception -->
-<ng-template #popContentPp>
-  <input type="number" name="ppValue" value="{{adjustingPP}}"
-    (keydown.enter)="setCombatantPP(newPP.value)" #newPP>
-</ng-template>
 
 <!-- Modal content to add combatant to initiative list -->
 <ng-template #addcontent let-modal>
