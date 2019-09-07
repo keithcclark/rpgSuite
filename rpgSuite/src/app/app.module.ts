@@ -18,6 +18,7 @@ import { TrackerframeComponent } from './tracker/trackerframe/trackerframe.compo
 import { TrackerCardComponent } from './Tracker/tracker/tracker-card/tracker-card.component';
 import { TrackerInfoComponent } from './Tracker/tracker/tracker-info/tracker-info.component';
 import { CombatantStatusComponent } from './Tracker/tracker/combatant-status/combatant-status.component';
+import { AddMonsterComponent } from './monster/add-monster/add-monster.component';
 
 
 
@@ -33,7 +34,8 @@ import { CombatantStatusComponent } from './Tracker/tracker/combatant-status/com
     HerocardComponent,
     TrackerCardComponent,
     TrackerInfoComponent,
-    CombatantStatusComponent
+    CombatantStatusComponent,
+    AddMonsterComponent
   ],
   imports: [
     BrowserModule,
