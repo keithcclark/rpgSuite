@@ -1,54 +1,88 @@
+
+<!--
+  Purpose: Present a form to the user to information about a moster to be added to the data base
+-->
+
 <form>
+  <!-- Basic Info Identifier -->
+  <div class="row">
+    <div class="col-10">
+        <h2>BASIC INFORMATION</h2>
+    </div>
+    <div class="col-2">
+        * Required
+    </div>
+  </div>
+  <div class="container">
+      <small>
+          Start by entering basic details for your homebrew monster below. You will be able to 
+          provide more relevant details once it is created to take advantage of advanced search, filtering, and character features.
+          <hr>
+      </small>
+  </div>
+  <!-- Monster Name -->
     <div class="form-group">
       <label for="MonsterName">Monster Name</label>
       <input type="text" class="form-control" id="mName" aria-describedby="mNmae" placeholder="DoomBeast">
     </div>
+    <!-- Monster Ability Scores -->
     <div class="form-group">
       <div class="row">
+        <!-- Strength -->
         <div class="col-2">
             <label for="strScore" class="">STR </label> 
             <input type="number" class="form-control" id="strScore" placeholder="10">
+            <!-- Strenght saving throw proficiency -->
             <div class="text-center">
                 <input type="checkbox" class="form-check-input" id="strSave">
                 <label class="form-check-label" for="strSave">Save</label>
             </div>
-            
         </div>
+        <!-- Dexterity -->
         <div class="col-2">
             <label for="dexScore" class="font-weight-bold">DEX</label>
             <input type="number" class="form-control" id="dexScore" placeholder="10">
+            <!-- Strenght saving throw proficiency -->
             <div class="text-center">
                 <input type="checkbox" class="form-check-input" id="dexSave">
                 <label class="form-check-label" for="dexSave">Save</label>
             </div>
         </div>
+        <!-- Constitution -->
         <div class="col-2">
             <label for="conScore" class="font-weight-bold">CON</label>
             <input type="number" class="form-control" id="conScore" placeholder="10">
+            <!-- Constitution saving throw proficiency -->
             <div class="text-center">
                 <input type="checkbox" class="form-check-input" id="conSave">
                 <label class="form-check-label" for="conSave">Save</label>
             </div>
         </div>
+        <!-- Intelligence -->
         <div class="col-2">
             <label for="intScore" class="font-weight-bold">INT </label>
             <input type="number" class="form-control" id="intScore" placeholder="10">
+            <!--  Intelligence saving throw proficiency -->
             <div class="text-center">
                 <input type="checkbox" class="form-check-input" id="intSave">
                 <label class="form-check-label" for="intSave">Save</label>
             </div>
         </div>
+        <!-- Wisdom -->
         <div class="col-2">
             <label for="wisScore" class="font-weight-bold">WIS</label>
             <input type="number" class="form-control" id="wisScore" placeholder="10">
+            <!-- Wisdom saving throw proficiency -->
             <div class="text-center">
                 <input type="checkbox" class="form-check-input" id="wisSave">
                 <label class="form-check-label" for="wisSave">Save</label>
             </div>
         </div>
+        <!-- Charisma  -->
         <div class="col-2">
             <label for="chrScore" class="font-weight-bold">CHR</label>
             <input type="number" class="form-control" id="chrScore" placeholder="10">
+            <!-- Charisma saving throw proficiency -->
             <div class="text-center">
                 <input type="checkbox" class="form-check-input" id="chrSave">
                 <label class="form-check-label" for="chrSave">Save</label>
@@ -56,21 +90,157 @@
         </div>
       </div>
     </div>
+    <!-- Basic combat stats -->
     <div class="form-group">
       <div class="row">
+        <!-- Armor Class -->
         <div class="col-4">
           <label for="armor_class" class="">Armor Class </label> 
           <input type="number" class="form-control" id="armor_class" placeholder="10">
         </div>
+        <!-- Hit Points -->
         <div class="col-4">
           <label for="hit_points" class="">Hit Points </label> 
           <input type="number" class="form-control" id="hit_points" placeholder="10">
         </div>
+        <!-- Hit Dice -->
         <div class="col-4">
           <label for="hit_dice" class="">Hit Dice</label> 
          <input type="number" class="form-control" id="hit_dice" placeholder="3d6">
         </div>
       </div>
     </div>
+    <!-- CR and type -->
+    <div class="form-group">
+      <div class="row">
+        <!-- CR -->
+        <div class="col-4">
+            <label for="challenge_rating">Challenge Rating</label>
+            <select class="form-control" id="challenge_rating">
+              <!-- create cr service and fill in options form there -->
+              <option>1</option>
+            </select>
+        </div>
+        <!-- Monster Type -->
+        <div class="col-4">
+            <label for="creature_type">Creature Type</label>
+            <select class="form-control" id="creature_type">
+              <!-- create creature type service and fill in options form there -->
+              <option>1</option>
+            </select>
+        </div>
+        <!-- Monster Sub Type if any -->
+        <div class="col-4">
+            <label for="subtypes">Creature Subtype</label>
+            <select class="form-control" id="subtypes">
+              <!-- create creature type service and fill in options form there -->
+              <option>1</option>
+            </select>
+        </div>
+      </div>
+    </div>
+    <!-- Alignment Size and Languages -->
+    <div class="form-group">
+      <div class="row">
+        <!-- Alignment -->
+        <div class="col-4">
+            <label for="alignment">Challenge Rating</label>
+            <select class="form-control" id="alignment">
+              <!-- create alignment service and fill in options form there -->
+              <option>1</option>
+            </select>
+        </div>
+        <!-- Size -->
+        <div class="col-4">
+            <label for="creature_size">Creature Size</label>
+            <select class="form-control" id="creature_size">
+              <!-- create size service and fill in options form there -->
+              <option>1</option>
+            </select>
+        </div>
+        <!-- Languages -->
+        <div class="col-4">
+            <label for="languages">Creature Size</label>
+            <select class="form-control" id="languages">
+              <!-- create language service and fill in options form there -->
+              <option>1</option>
+            </select>
+        </div>
+      </div>
+    </div>
+    <!-- Traits, Action,s and Skills -->
+    <div class="row">
+      <div class="col-9">
+         <!-- Traits -->
+    <div class="row">
+        <div class="col">
+          <h2>TRAITS</h2>
+        </div>
+        <div class="col-1">
+            <button class="btn btn-dark btn-block btn-sm"><i class="fas fa-plus-square"></i></button>
+        </div>
+      </div>
+      <div class="container">
+        <small>some description text will go here</small>
+        <hr>
+      </div>
+      <div>
+        <app-trait-card></app-trait-card>
+      </div>
+      <!-- Actions -->
+      <div class="row">
+          <div class="col">
+            <h2>ACTIONS</h2>
+          </div>
+          <div class="col-1">
+              <button class="btn btn-dark btn-block btn-sm"><i class="fas fa-plus-square"></i></button>
+          </div>
+        </div>
+        <div class="container">
+          <small>some description text will go here</small>
+          <hr>
+        </div>
+        <div>
+          <app-action-card></app-action-card>
+        </div>
+      <!-- Recations -->
+      <div class="row">
+          <div class="col">
+            <h2>REACTIONS</h2>
+          </div>
+          <div class="col-1">
+              <button class="btn btn-dark btn-block btn-sm"><i class="fas fa-plus-square"></i></button>
+          </div>
+        </div>
+        <div class="container">
+          <small>some description text will go here</small>
+          <hr>
+        </div>
+        <div>
+          <app-reaction-card></app-reaction-card>
+        </div>
+      <!-- Legendary Actions -->
+      <div class="row">
+          <div class="col">
+            <h2>LEGENDARY ACTIONS</h2>
+          </div>
+          <div class="col-1">
+              <button class="btn btn-dark btn-block btn-sm"><i class="fas fa-plus-square"></i></button>
+          </div>
+        </div>
+        <div class="container">
+          <small>some description text will go here</small>
+          <hr>
+        </div>
+        <div>
+          <app-legendary-card></app-legendary-card>
+        </div>
+      </div>
+      <div class="col-3 border">
+
+      </div>
+    </div>
+   
+    <p></p>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
