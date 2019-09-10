@@ -4,6 +4,7 @@
 -->
 
 <form>
+  <div class="container mb-5 border">
   <!-- Basic Info Identifier -->
   <div class="row">
     <div class="col-10">
@@ -168,23 +169,85 @@
         </div>
       </div>
     </div>
-    <!-- Traits, Action,s and Skills -->
+    <!-- Damage and Condtion vulnerability, resistance, and immunity  -->
+    <div class="form-group">
+        <div class="row">
+          <!-- Damage Vulnerability -->
+          <div class="col-3">
+              <label for="damageVulnerability">Damage Vulnerability</label>
+              <select class="form-control" id="damageVulnerability">
+                <!-- create Damage Type service and fill in options form there -->
+                <option>1</option>
+              </select>
+          </div>
+          <!-- Damage Resistance -->
+          <div class="col-3">
+              <label for="damageResistance">Damage Resistance</label>
+              <select class="form-control" id="damageResistance">
+                <!-- create Damage Type service and fill in options form there -->
+                <option>1</option>
+              </select>
+          </div>
+          <!-- Damage Immunity -->
+          <div class="col-3">
+              <label for="damageImmunity">Damage Immunity</label>
+              <select class="form-control" id="damageImmunity">
+                <!-- create Damage Type service and fill in options form there -->
+                <option>1</option>
+              </select>
+          </div>
+          <!-- Condition Immunity -->
+          <div class="col-3">
+              <label for="conditionImmunity">Condition Immunity</label>
+              <select class="form-control" id="conditionImmunity">
+                <!-- create Condition service and fill in options form there -->
+                <option>1</option>
+              </select>
+          </div>
+        </div>
+      </div>
+      <!-- Speed and Senses -->
+      <div class="form-group">
+        <div class="row">
+          <!-- Speeds -->
+          <div class="col">
+              <label for="speeds">Speeds</label>
+              <select class="form-control" id="speeds">
+                <!-- create Speeds service and fill in options form there 
+                also need way to manage the distance of the speed.
+                -->
+                <option>1</option>
+              </select>
+          </div>
+          <div class="col">
+              <label for="senses">Senses</label>
+              <select class="form-control" id="senses">
+                <!-- create Senses service and fill in options form there 
+                also need way to manage the distance of the speed.
+                -->
+                <option>1</option>
+              </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+    <!-- Traits, Actions, and Skills -->
     <div class="row">
       <div class="col-9">
          <!-- Traits -->
     <div class="row">
         <div class="col">
-          <h2>TRAITS</h2>
+          <h2>TRAITS</h2> 
         </div>
-        <div class="col-1">
-            <button class="btn btn-dark btn-block btn-sm"><i class="fas fa-plus-square"></i></button>
+        <div class="col-2">
+            <button class="btn btn-dark btn-block btn-sm" (click)="addTrait()"><i class="fas fa-plus-square"></i></button>
         </div>
       </div>
       <div class="container">
-        <small>some description text will go here</small>
         <hr>
       </div>
-      <div>
+      <div *ngFor="let trait of traitsComponents">
         <app-trait-card></app-trait-card>
       </div>
       <!-- Actions -->
@@ -192,15 +255,15 @@
           <div class="col">
             <h2>ACTIONS</h2>
           </div>
-          <div class="col-1">
-              <button class="btn btn-dark btn-block btn-sm"><i class="fas fa-plus-square"></i></button>
+          <div class="col-2">
+              <button class="btn btn-dark btn-block btn-sm" (click)="addAction()"><i class="fas fa-plus-square"></i></button>
           </div>
         </div>
         <div class="container">
           <small>some description text will go here</small>
           <hr>
         </div>
-        <div>
+        <div *ngFor="let action of actionsComponets">
           <app-action-card></app-action-card>
         </div>
       <!-- Recations -->
@@ -208,15 +271,15 @@
           <div class="col">
             <h2>REACTIONS</h2>
           </div>
-          <div class="col-1">
-              <button class="btn btn-dark btn-block btn-sm"><i class="fas fa-plus-square"></i></button>
+          <div class="col-2">
+              <button class="btn btn-dark btn-block btn-sm"(click)="addReaction()"><i class="fas fa-plus-square"></i></button>
           </div>
         </div>
         <div class="container">
           <small>some description text will go here</small>
           <hr>
         </div>
-        <div>
+        <div *ngFor="let action of reactionsComponents">
           <app-reaction-card></app-reaction-card>
         </div>
       <!-- Legendary Actions -->
@@ -224,23 +287,24 @@
           <div class="col">
             <h2>LEGENDARY ACTIONS</h2>
           </div>
-          <div class="col-1">
-              <button class="btn btn-dark btn-block btn-sm"><i class="fas fa-plus-square"></i></button>
+          <div class="col-2">
+              <button class="btn btn-dark btn-block btn-sm" (click)="addLegendary()"><i class="fas fa-plus-square"></i></button>
           </div>
         </div>
         <div class="container">
           <small>some description text will go here</small>
           <hr>
         </div>
-        <div>
+        <div *ngFor="let action of legendaryComponets">
           <app-legendary-card></app-legendary-card>
         </div>
       </div>
+      <!-- Skills -->
       <div class="col-3 border">
-
+        SKILLS
       </div>
     </div>
-   
+   </div>
     <p></p>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
