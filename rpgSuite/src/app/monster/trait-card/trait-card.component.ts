@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-trait-card',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trait-card.component.sass']
 })
 export class TraitCardComponent implements OnInit {
+  @Input() traitNo: Number;
+  @Output() removeTrait = new EventEmitter<Number>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  removeMe() {
+    // console.log('removeMe called');
+    this.removeTrait.emit(this.traitNo);
+  }
 }

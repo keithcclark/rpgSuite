@@ -247,8 +247,8 @@
       <div class="container">
         <hr>
       </div>
-      <div *ngFor="let trait of traitsComponents">
-        <app-trait-card></app-trait-card>
+      <div *ngFor="let trait of traitsComponents; let i = index">
+        <app-trait-card [traitNo]="i" (removeTrait)="removeTrait($event)"></app-trait-card>
       </div>
       <!-- Actions -->
       <div class="row">
@@ -260,7 +260,6 @@
           </div>
         </div>
         <div class="container">
-          <small>some description text will go here</small>
           <hr>
         </div>
         <div *ngFor="let action of actionsComponets">
@@ -276,7 +275,6 @@
           </div>
         </div>
         <div class="container">
-          <small>some description text will go here</small>
           <hr>
         </div>
         <div *ngFor="let action of reactionsComponents">
@@ -292,7 +290,6 @@
           </div>
         </div>
         <div class="container">
-          <small>some description text will go here</small>
           <hr>
         </div>
         <div *ngFor="let action of legendaryComponets">

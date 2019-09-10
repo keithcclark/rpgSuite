@@ -21,23 +21,24 @@ export class AddMonsterComponent implements OnInit {
 
   addTrait() {
     this.traitsComponents.push(this.traits);
-    console.log(this.traitsComponents);
     this.traits ++;
+  }
+
+  removeTrait($event) {
+    // console.log('removeTrait called');
+    this.traitsComponents.splice($event, 1);
   }
 
   addAction() {
     this.actionsComponets.push(this.actions);
-    console.log(this.actionsComponets);
     this.actions ++;
   }
   addReaction() {
     this.reactionsComponents.push(this.reactions);
-    console.log(this.reactionsComponents);
     this.reactions ++;
   }
   addLegendary() {
     this.legendaryComponets.push(this.legendary);
-    console.log(this.legendaryComponets);
     this.legendary ++;
   }
 }
