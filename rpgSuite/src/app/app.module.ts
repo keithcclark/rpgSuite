@@ -23,6 +23,7 @@ import { TraitCardComponent } from './monster/trait-card/trait-card.component';
 import { ActionCardComponent } from './monster/action-card/action-card.component';
 import { ReactionCardComponent } from './monster/reaction-card/reaction-card.component';
 import { LegendaryCardComponent } from './monster/legendary-card/legendary-card.component';
+import { FractionsPipe } from './shared/pipes/fractions.pipe';
 
 
 
@@ -43,7 +44,8 @@ import { LegendaryCardComponent } from './monster/legendary-card/legendary-card.
     TraitCardComponent,
     ActionCardComponent,
     ReactionCardComponent,
-    LegendaryCardComponent
+    LegendaryCardComponent,
+    FractionsPipe
   ],
   imports: [
     BrowserModule,

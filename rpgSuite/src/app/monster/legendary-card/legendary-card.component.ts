@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 
 @Component({
@@ -8,10 +8,16 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class LegendaryCardComponent implements OnInit {
 
-
+  @Input() legendaryNo: Number;
+  @Output() removeLegendary = new EventEmitter<Number>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  removeMe() {
+    // console.log('removeMe called');
+    this.removeLegendary.emit(this.legendaryNo);
   }
 }

@@ -3,18 +3,21 @@
 <div class="form-group">
     <div class="row">
       <div class="col">
-          <label for="legendary_name">Name</label>
-          <input type="text" class="form-control" id="legendary_name" aria-describedby="legendary_name" placeholder="Claw">
+          <label for="legendary_name{{legendaryNo}}">Name</label>
+          <input type="text" class="form-control" id="legendary_name{{legendaryNo}}" aria-describedby="legendary_name" placeholder="Claw">
       </div>
       <div class="col-2">
-          <label for="legendary_cost">Attack Bonus</label>
-          <input type="text" class="form-control" id="legendary_cost" aria-describedby="legendary_cost" placeholder="5">
+          <label for="legendary_cost{{legendaryNo}}">Point Cost</label>
+          <input type="text" class="form-control" id="legendary_cost{{legendaryNo}}" aria-describedby="legendary_cost" placeholder="5">
+      </div>
+      <div class="col-1">
+          <button class="btn btn-dark btn-block btn-sm" (click)="removeMe()"><i class="fas fa-minus-square"></i></button>
       </div>
     </div>
     <div class="row">
       <div class="col">
-          <label for="legendary_description">Description</label>
-          <textarea class="form-control" id="legendary_description" rows="3"></textarea>
+          <label for="legendary_description{{legendaryNo}}">Description</label>
+          <textarea class="form-control" id="legendary_description{{legendaryNo}}" rows="3"></textarea>
       </div>
     </div>
   </div>

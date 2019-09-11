@@ -1,6 +1,13 @@
 <div class="form-group">
-    <label for="reaction_name">Name</label>
-    <input type="text" class="form-control" id="reaction_name" aria-describedby="reaction_name" placeholder="Run">
-    <label for="reaction_description">Description</label>
-    <textarea class="form-control" id="reaction_description" rows="3"></textarea>
+    <div class="row">
+        <div class="col">
+            <label for="reaction_name{{reactionNo}}">Name</label>
+            <input type="text" class="form-control" id="reaction_name{{reactionNo}}" aria-describedby="reaction_name" placeholder="Run">
+        </div>
+        <div class="col-1">
+            <button class="btn btn-dark btn-block btn-sm" (click)="removeMe()"><i class="fas fa-minus-square"></i></button>
+        </div>
+    </div>
+    <label for="reaction_description{{reactionNo}}">Description</label>
+    <textarea class="form-control" id="reaction_description{{reactionNo}}" rows="3"></textarea>
 </div>

@@ -1,12 +1,11 @@
 <div class="form-group">
-    {{traitNo}}
     <div class="row">
         <div class="col">
             <label for="traitName{{traitNo}}">Name</label>
             <input type="text" class="form-control" id="traitName{{traitNo}}" aria-describedby="traitName" placeholder="Sticky">
         </div>
         <div class="col-1">
-            <button class="btn btn-dark btn-block btn-sm" (click)="removeMe()">-</button>
+            <button class="btn btn-dark btn-block btn-sm" (click)="removeMe()"><i class="fas fa-minus-square"></i></button>
         </div>
     </div>
     <label for="traitDescription{{traitNo}}">Description</label>

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  creatureUrl : 'http://localhost:3434/creatures'
+  creatureUrl : 'http://localhost:3434/creatures',
+  crUrl : 'http://localhost:3434/challenge_rating'
 };
 
 /*

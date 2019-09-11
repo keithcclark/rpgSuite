@@ -117,9 +117,8 @@
         <!-- CR -->
         <div class="col-4">
             <label for="challenge_rating">Challenge Rating</label>
-            <select class="form-control" id="challenge_rating">
-              <!-- create cr service and fill in options form there -->
-              <option>1</option>
+            <select class="form-control" id="challenge_rating" >
+              <option *ngFor="let cr of crList">{{cr.cr | fractions}}</option>
             </select>
         </div>
         <!-- Monster Type -->
@@ -145,7 +144,7 @@
       <div class="row">
         <!-- Alignment -->
         <div class="col-4">
-            <label for="alignment">Challenge Rating</label>
+            <label for="alignment">Alignment</label>
             <select class="form-control" id="alignment">
               <!-- create alignment service and fill in options form there -->
               <option>1</option>
@@ -262,8 +261,8 @@
         <div class="container">
           <hr>
         </div>
-        <div *ngFor="let action of actionsComponets">
-          <app-action-card></app-action-card>
+        <div *ngFor="let action of actionsComponets; let i = index">
+          <app-action-card [actionNo]="i" (removeAction)="removeAction($event)"></app-action-card>
         </div>
       <!-- Recations -->
       <div class="row">
@@ -277,8 +276,8 @@
         <div class="container">
           <hr>
         </div>
-        <div *ngFor="let action of reactionsComponents">
-          <app-reaction-card></app-reaction-card>
+        <div *ngFor="let action of reactionsComponents; let i = index">
+          <app-reaction-card [reactionNo]="i" (removeReaction)="removeReaction($event)"></app-reaction-card>
         </div>
       <!-- Legendary Actions -->
       <div class="row">
@@ -292,8 +291,8 @@
         <div class="container">
           <hr>
         </div>
-        <div *ngFor="let action of legendaryComponets">
-          <app-legendary-card></app-legendary-card>
+        <div *ngFor="let action of legendaryComponets; let i = index">
+          <app-legendary-card [legendaryNo]="i" (removeLegendary)="removeLegendary($event)"></app-legendary-card>
         </div>
       </div>
       <!-- Skills -->

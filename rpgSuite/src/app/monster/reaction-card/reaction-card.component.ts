@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-reaction-card',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReactionCardComponent implements OnInit {
 
+  @Input() reactionNo: Number;
+  @Output() removeReaction = new EventEmitter<Number>();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  removeMe() {
+    //console.log('removeMe called');
+    this.removeReaction.emit(this.reactionNo);
+  }
 }
