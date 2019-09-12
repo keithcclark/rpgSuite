@@ -18,6 +18,12 @@ import { TrackerframeComponent } from './tracker/trackerframe/trackerframe.compo
 import { TrackerCardComponent } from './Tracker/tracker/tracker-card/tracker-card.component';
 import { TrackerInfoComponent } from './Tracker/tracker/tracker-info/tracker-info.component';
 import { CombatantStatusComponent } from './Tracker/tracker/combatant-status/combatant-status.component';
+import { AddMonsterComponent } from './monster/add-monster/add-monster.component';
+import { TraitCardComponent } from './monster/trait-card/trait-card.component';
+import { ActionCardComponent } from './monster/action-card/action-card.component';
+import { ReactionCardComponent } from './monster/reaction-card/reaction-card.component';
+import { LegendaryCardComponent } from './monster/legendary-card/legendary-card.component';
+import { FractionsPipe } from './shared/pipes/fractions.pipe';
 
 
 
@@ -33,7 +39,13 @@ import { CombatantStatusComponent } from './Tracker/tracker/combatant-status/com
     HerocardComponent,
     TrackerCardComponent,
     TrackerInfoComponent,
-    CombatantStatusComponent
+    CombatantStatusComponent,
+    AddMonsterComponent,
+    TraitCardComponent,
+    ActionCardComponent,
+    ReactionCardComponent,
+    LegendaryCardComponent,
+    FractionsPipe
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,29 @@
+<div class="form-group">
+  <div class="row">
+    <div class="col">
+        <label for="action_name{{actionNo}}">Name</label>
+        <input type="text" class="form-control" id="action_name{{actionNo}}" aria-describedby="action_name" placeholder="Claw">
+    </div>
+    <div class="col-2">
+        <label for="attackBonus{{actionNo}}">Attack Bonus</label>
+        <input type="text" class="form-control" id="attackBonus{{actionNo}}" aria-describedby="attackBonus" placeholder="5">
+    </div>
+    <div class="col-2">
+        <label for="damageDice{{actionNo}}">Damage Dice</label>
+        <input type="text" class="form-control" id="damageDice{{actionNo}}" aria-describedby="damageDice" placeholder="2d6">
+    </div>
+    <div class="col-2">
+        <label for="damageBonus{{actionNo}}">Damage Bonus</label>
+        <input type="text" class="form-control" id="damageBonus{{actionNo}}" aria-describedby="damageBonus" placeholder="5">
+    </div>
+    <div class="col-1">
+        <button class="btn btn-dark btn-block btn-sm" (click)="removeMe()"><i class="fas fa-minus-square"></i></button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <label for="action_description{{actionNo}}">Description</label>
+        <textarea class="form-control" id="action_description{{actionNo}}" rows="3"></textarea>
+    </div>
+  </div>
+</div>

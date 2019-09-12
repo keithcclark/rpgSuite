@@ -1,4 +1,5 @@
 import { ChallengeRating } from './challenge-rating';
+import { Alignment } from './alignment';
 
 export class Monster {
     // from the database
@@ -14,7 +15,7 @@ export class Monster {
     savingThrows: [];
     challenge_rating: ChallengeRating;
     creature_type: any;
-    alignment: any;
+    alignment: Alignment;
     creature_size: any;
     languages = new Array<any>();
     traits = new Array<any>();
