@@ -146,24 +146,21 @@
         <div class="col-4">
             <label for="alignment">Alignment</label>
             <select class="form-control" id="alignment">
-              <!-- create alignment service and fill in options form there -->
-              <option>1</option>
+              <option *ngFor="let alignment of alignmentList">{{alignment.alignment}}</option>
             </select>
         </div>
         <!-- Size -->
         <div class="col-4">
             <label for="creature_size">Creature Size</label>
             <select class="form-control" id="creature_size">
-              <!-- create size service and fill in options form there -->
-              <option>1</option>
+              <option *ngFor="let size of sizeList">{{size.creature_size}}</option>
             </select>
         </div>
         <!-- Languages -->
         <div class="col-4">
-            <label for="languages">Creature Size</label>
+            <label for="languages">Languages</label>
             <select class="form-control" id="languages">
-              <!-- create language service and fill in options form there -->
-              <option>1</option>
+              <option *ngFor="let lang of languageList">{{lang.name}}</option>
             </select>
         </div>
       </div>
@@ -175,32 +172,28 @@
           <div class="col-3">
               <label for="damageVulnerability">Damage Vulnerability</label>
               <select class="form-control" id="damageVulnerability">
-                <!-- create Damage Type service and fill in options form there -->
-                <option>1</option>
+                <option *ngFor="let vul of damageTypeList">{{vul.name}}</option>
               </select>
           </div>
           <!-- Damage Resistance -->
           <div class="col-3">
               <label for="damageResistance">Damage Resistance</label>
               <select class="form-control" id="damageResistance">
-                <!-- create Damage Type service and fill in options form there -->
-                <option>1</option>
+                <option *ngFor="let res of damageTypeList">{{res.name}}</option>
               </select>
           </div>
           <!-- Damage Immunity -->
           <div class="col-3">
               <label for="damageImmunity">Damage Immunity</label>
               <select class="form-control" id="damageImmunity">
-                <!-- create Damage Type service and fill in options form there -->
-                <option>1</option>
+                <option *ngFor="let imm of damageTypeList">{{imm.name}}</option>
               </select>
           </div>
           <!-- Condition Immunity -->
           <div class="col-3">
               <label for="conditionImmunity">Condition Immunity</label>
               <select class="form-control" id="conditionImmunity">
-                <!-- create Condition service and fill in options form there -->
-                <option>1</option>
+                <option *ngFor="let con of conditionList">{{con.name}}</option>
               </select>
           </div>
         </div>
@@ -212,19 +205,13 @@
           <div class="col">
               <label for="speeds">Speeds</label>
               <select class="form-control" id="speeds">
-                <!-- create Speeds service and fill in options form there 
-                also need way to manage the distance of the speed.
-                -->
-                <option>1</option>
+                <option *ngFor="let speed of speedList">{{speed.speed}}</option>
               </select>
           </div>
           <div class="col">
               <label for="senses">Senses</label>
               <select class="form-control" id="senses">
-                <!-- create Senses service and fill in options form there 
-                also need way to manage the distance of the speed.
-                -->
-                <option>1</option>
+                <option *ngFor="let sense of senseList">{{sense.sense}}</option>
               </select>
           </div>
         </div>

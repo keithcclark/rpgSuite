@@ -5,7 +5,14 @@
 export const environment = {
   production: false,
   creatureUrl : 'http://localhost:3434/creatures',
-  crUrl : 'http://localhost:3434/challenge_rating'
+  crUrl : 'http://localhost:3434/challenge_rating',
+  alignmentUrl: 'http://localhost:3434/alignment',
+  speedUrl: 'http://localhost:3434/speed',
+  sizeUrl: 'http://localhost:3434/size',
+  languageUrl: 'http://localhost:3434/language',
+  damage_typeUrl: 'http://localhost:3434/damage_type',
+  conditionUrl: 'http://localhost:3434/condition',
+  senseUrl: 'http://localhost:3434/sense'
 };
 
 /*
