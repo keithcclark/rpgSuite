@@ -1,4 +1,4 @@
 export class ChallengeRating {
-    cr: string;
+    cr: String;
     xp: Number;
 }

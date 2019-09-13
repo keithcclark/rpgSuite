@@ -33,7 +33,7 @@
                 <!-- Strength -->
                 <div class="col-2">
                     <label for="strScore" class="">STR </label> 
-                    <input [(ngModel)]="dummy.strenght" name="strength" type="number" class="form-control" id="strScore" placeholder="10">
+                    <input [(ngModel)]="dummy.strength" name="strength" type="number" class="form-control" id="strScore" placeholder="10">
                     <!-- Strenght saving throw proficiency -->
                     <div class="text-center">
                         <input type="checkbox" class="form-check-input" id="strSave">
@@ -44,7 +44,7 @@
                 <div class="col-2">
                     <label for="dexScore" class="font-weight-bold">DEX</label>
                     <input [(ngModel)]="dummy.dexterity" name="dexterity" type="number" class="form-control" id="dexScore" placeholder="10">
-                    <!-- Strenght saving throw proficiency -->
+                    <!-- Dexterity saving throw proficiency -->
                     <div class="text-center">
                         <input type="checkbox" class="form-check-input" id="dexSave">
                         <label class="form-check-label" for="dexSave">Save</label>
@@ -108,7 +108,7 @@
                 <!-- Hit Dice -->
                 <div class="col-4">
                   <label for="hit_dice" class="">Hit Dice</label> 
-                 <input [(ngModel)]="dummy.hit_dice" name="hit_dice" type="number" class="form-control" id="hit_dice" placeholder="3d6">
+                 <input [(ngModel)]="dummy.hit_dice" name="hit_dice" type="text" class="form-control" id="hit_dice" placeholder="3d6">
                 </div>
               </div>
             </div>
@@ -125,16 +125,16 @@
                 <!-- Monster Type -->
                 <div class="col-4">
                     <label for="creature_type">Creature Type</label>
-                    <select [(ngModel)]="dummy.creature_type.id" name="creature_type" (ngModelChange)="getSubTypeList($event)" class="form-control" id="creature_type">
+                    <select [(ngModel)]="dummy.creature_type.id" (ngModelChange)="getSubTypeList($event)" name="creature_type" class="form-control" id="creature_type">
                       <option *ngFor="let type of typeList" [value]="type.id">{{type.type}}</option>
                     </select>
                 </div>
                 <!-- Monster Sub Type if any -->
                 <div class="col-4">
                     <label for="subtypes">Creature Subtype</label>
-                    <select class="form-control" id="subtypes">>
+                    <select [(ngModel)]="dummy.creature_type.subtypes[0].id" name ="subtype" class="form-control" id="subtypes">>
                       <option>-</option>
-                      <option *ngFor="let sub of subTypeList">{{sub.type}}</option>
+                      <option *ngFor="let sub of subTypeList" [value]="sub.id">{{sub.type}}</option>
                     </select>
                 </div>
               </div>
@@ -145,8 +145,8 @@
                 <!-- Alignment -->
                 <div class="col-4">
                     <label for="alignment">Alignment</label>
-                    <select class="form-control" id="alignment">
-                      <option *ngFor="let alignment of alignmentList">{{alignment.alignment}}</option>
+                    <select [(ngModel)]="dummy.alignment.id" name="alignment" class="form-control" id="alignment">
+                      <option *ngFor="let alignment of alignmentList" [value]="alignment.id">{{alignment.alignment}}</option>
                     </select>
                 </div>
                 <!-- Size -->

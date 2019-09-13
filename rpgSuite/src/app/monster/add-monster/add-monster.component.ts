@@ -20,6 +20,12 @@ import {DamageType} from '../../shared/classes/damage-type';
 import {Condition} from '../../shared/classes/condition';
 import {Sense} from '../../shared/classes/sense';
 import {Type} from '../../shared/classes/type';
+import { Trait } from 'src/app/shared/classes/trait';
+import { Action } from 'src/app/shared/classes/action';
+import { Reaction } from 'src/app/shared/classes/reaction';
+import { LegendaryAction } from 'src/app/shared/classes/legendary-action';
+import { Environment } from 'src/app/shared/classes/environment';
+import { Skill } from 'src/app/shared/classes/skill';
 
 @Component({
   selector: 'app-add-monster',
@@ -152,7 +158,40 @@ export class AddMonsterComponent implements OnInit {
     this.dummy.hit_points = 0;
     this.dummy.hit_dice = '';
     this.dummy.challenge_rating = new ChallengeRating();
+    this.dummy.challenge_rating.cr = '0';
+    this.dummy.challenge_rating.xp = 0;
     this.dummy.creature_type = new Type();
     this.dummy.creature_type.id = 0;
+    this.dummy.creature_type.type = '';
+    this.dummy.creature_type.description = '';
+    this.dummy.creature_type.subtypes = new Array<Type>();
+    this.dummy.creature_type.subtypes[0] = new Type();
+    this.dummy.creature_type.subtypes[0].id = 0;
+    this.dummy.creature_type.subtypes[0].type = '';
+    this.dummy.creature_type.subtypes[0].description = '';
+    this.dummy.alignment = new Alignment();
+    this.dummy.alignment.id = 0;
+    this.dummy.alignment.alignment = '';
+    this.dummy.alignment.description = '';
+    this.dummy.creature_size = new Size();
+    this.dummy.creature_size.id = 0;
+    this.dummy.creature_size.creature_size = '';
+    this.dummy.creature_size.description = '';
+    this.dummy.languages = new Array<Language>();
+    this.dummy.languages[0] = new Language();
+    this.dummy.languages[0].id = 0;
+    this.dummy.languages[0].name = '';
+    this.dummy.traits = new Array<Trait>();
+    this.dummy.actions = new Array<Action>();
+    this.dummy.reactions = new Array<Reaction>();
+    this.dummy.legendaryActions = new Array<LegendaryAction>();
+    this.dummy.environments = new Array<Environment>();
+    this.dummy.damageVulnerability = new Array<DamageType>();
+    this.dummy.damageResistance = new Array<DamageType>();
+    this.dummy.damageImmunity = new Array<DamageType>();
+    this.dummy.conditionImmunity = new Array<Condition>();
+    this.dummy.senses = new Array<Sense>();
+    this.dummy.speeds = new Array<Speed>();
+    this.dummy.skills = new Array<Skill>();
   }
 }
