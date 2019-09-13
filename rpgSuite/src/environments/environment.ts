@@ -12,7 +12,8 @@ export const environment = {
   languageUrl: 'http://localhost:3434/language',
   damage_typeUrl: 'http://localhost:3434/damage_type',
   conditionUrl: 'http://localhost:3434/condition',
-  senseUrl: 'http://localhost:3434/sense'
+  senseUrl: 'http://localhost:3434/sense',
+  typeUrl: 'http://localhost:3434/type'
 };
 
 /*
