@@ -14,13 +14,13 @@ export class TrackerInfoComponent implements OnInit {
   adjustCreature: Monster;
   lastpopOver: any;
   // hp
-  adjustingHP: number;
+  adjustingHP: Number;
   overMaxHP: boolean;
   // ac
-  adjustingAC: number;
+  adjustingAC: Number;
   overMaxAC: boolean;
   // passive perception
-  adjustingPP: number;
+  adjustingPP: Number;
   overMaxPP: boolean;
 
   constructor() { }

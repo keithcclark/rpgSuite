@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import {NgxExtendedPdfViewerModule} from 'ngx-extended-pdf-viewer';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
 
 
 import { AppComponent } from './app.component';
@@ -53,7 +54,8 @@ import { FractionsPipe } from './shared/pipes/fractions.pipe';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [MonsterService],
   bootstrap: [AppComponent]

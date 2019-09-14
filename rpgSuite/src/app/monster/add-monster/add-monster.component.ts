@@ -26,6 +26,8 @@ import { Reaction } from 'src/app/shared/classes/reaction';
 import { LegendaryAction } from 'src/app/shared/classes/legendary-action';
 import { Environment } from 'src/app/shared/classes/environment';
 import { Skill } from 'src/app/shared/classes/skill';
+import { CreatureType } from 'src/app/shared/classes/creature-type';
+import { Subtype } from 'src/app/shared/classes/subtype';
 
 @Component({
   selector: 'app-add-monster',
@@ -43,14 +45,24 @@ export class AddMonsterComponent implements OnInit {
   legendary = 0;
   crList = new Array<ChallengeRating>();
   alignmentList = new Array<Alignment>();
+  alignmentDropdownSettings = {};
   speedList = new Array<Speed>();
+  speedDropdownSettings = {};
   sizeList = new Array<Size>();
+  sizeDropdownSettings = {};
   languageList = new Array<Language>();
+  languageDropdownSettings = {};
   damageTypeList = new Array<DamageType>();
+  damageTypeDropdownSettings = {};
   conditionList = new Array<Condition>();
+  conditionDropdownSettings = {};
   senseList = new Array<Sense>();
+  senseDropdownSettings = {};
   typeList = new Array<Type>();
-  subTypeList = new Array<Type>();
+  typeDropdownSettings = {};
+  subTypeList = new Array<Subtype>();
+  subTypeDropdownSettings = {};
+  dropdownSettings = {};
 
   dummy = new Monster();
 
@@ -93,6 +105,7 @@ export class AddMonsterComponent implements OnInit {
     this.typeService.getTypes().subscribe(type => {
       this.typeList = type;
     });
+    this.initalizeDropdownSettings();
   }
 
   // ******************
@@ -141,8 +154,93 @@ export class AddMonsterComponent implements OnInit {
   // ************************
 
   // set list of subtypes based on selected type
-  getSubTypeList(id: number) {
-    this.subTypeList = this.typeList[id - 1].subtypes;
+  getSubTypeList(id: any) {
+    this.subTypeList = this.typeList[id.id - 1].subtypes;
+  }
+
+  initalizeDropdownSettings() {
+    this.alignmentDropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'alignment',
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Search',
+      enableCheckAll: false,
+      maxHeight: 100
+    };
+    this.conditionDropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Search',
+      enableCheckAll: false,
+      maxHeight: 100
+    };
+    this.damageTypeDropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Search',
+      enableCheckAll: false,
+      maxHeight: 100
+    };
+    this.languageDropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Search',
+      enableCheckAll: false,
+      maxHeight: 100
+    }
+    this.senseDropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'sense',
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Search',
+      enableCheckAll: false,
+      maxHeight: 100
+    };
+    this.sizeDropdownSettings = {
+      singleSelection: true,
+      idField: 'id',
+      textField: 'creature_size',
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Search',
+      enableCheckAll: false,
+      maxHeight: 100,
+    };
+    this.speedDropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'speed',
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Search',
+      enableCheckAll: false,
+      maxHeight: 100
+    };
+    this.subTypeDropdownSettings = {
+      singleSelection: true,
+      idField: 'id',
+      textField: 'type',
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Search',
+      enableCheckAll: false,
+      maxHeight: 100,
+      noDataAvailablePlaceholderTex: 'No Subtypes'
+    };
+    this.typeDropdownSettings = {
+      singleSelection: true,
+      idField: 'id',
+      textField: 'type',
+      allowSearchFilter: true,
+      searchPlaceholderText: 'Search',
+      enableCheckAll: false,
+      maxHeight: 100
+    };
   }
 
   // Intialize blank monster
@@ -158,30 +256,13 @@ export class AddMonsterComponent implements OnInit {
     this.dummy.hit_points = 0;
     this.dummy.hit_dice = '';
     this.dummy.challenge_rating = new ChallengeRating();
-    this.dummy.challenge_rating.cr = '0';
-    this.dummy.challenge_rating.xp = 0;
-    this.dummy.creature_type = new Type();
-    this.dummy.creature_type.id = 0;
-    this.dummy.creature_type.type = '';
-    this.dummy.creature_type.description = '';
-    this.dummy.creature_type.subtypes = new Array<Type>();
-    this.dummy.creature_type.subtypes[0] = new Type();
-    this.dummy.creature_type.subtypes[0].id = 0;
-    this.dummy.creature_type.subtypes[0].type = '';
-    this.dummy.creature_type.subtypes[0].description = '';
+    this.dummy.creature_type = new CreatureType();
+    this.dummy.creature_type.subtype = new Subtype();
     this.dummy.alignment = new Alignment();
-    this.dummy.alignment.id = 0;
-    this.dummy.alignment.alignment = '';
-    this.dummy.alignment.description = '';
     this.dummy.creature_size = new Size();
-    this.dummy.creature_size.id = 0;
-    this.dummy.creature_size.creature_size = '';
-    this.dummy.creature_size.description = '';
     this.dummy.languages = new Array<Language>();
-    this.dummy.languages[0] = new Language();
-    this.dummy.languages[0].id = 0;
-    this.dummy.languages[0].name = '';
     this.dummy.traits = new Array<Trait>();
+    this.dummy.traits[0] = new Trait();
     this.dummy.actions = new Array<Action>();
     this.dummy.reactions = new Array<Reaction>();
     this.dummy.legendaryActions = new Array<LegendaryAction>();
@@ -191,7 +272,13 @@ export class AddMonsterComponent implements OnInit {
     this.dummy.damageImmunity = new Array<DamageType>();
     this.dummy.conditionImmunity = new Array<Condition>();
     this.dummy.senses = new Array<Sense>();
+    this.dummy.senses[0] = new Sense();
+    this.dummy.senses[0].id = 0;
+    this.dummy.senses[0].sense = 'Passive Perception';
     this.dummy.speeds = new Array<Speed>();
+    this.dummy.speeds[0] = new Speed();
+    this.dummy.speeds[0].id = 1;
+    this.dummy.speeds[0].speed = 'Speed';
     this.dummy.skills = new Array<Skill>();
   }
 }

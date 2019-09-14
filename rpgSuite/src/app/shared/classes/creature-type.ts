@@ -1,8 +1,8 @@
 import { Subtype } from './subtype';
 
-export class Type {
+export class CreatureType {
     id: Number;
     type: String;
     description: String;
-    subtypes: Array<Subtype>;
+    subtype = new Subtype();
 }

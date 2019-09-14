@@ -3,7 +3,7 @@
   Purpose: Present a form to the user to information about a moster to be added to the data base
 -->
 <div class="row">
-  <div class="col">
+  <div class="col-9">
       <form #monsterForm = "ngForm">
           <div class="container mb-5 border">
           <!-- Basic Info Identifier -->
@@ -125,17 +125,30 @@
                 <!-- Monster Type -->
                 <div class="col-4">
                     <label for="creature_type">Creature Type</label>
-                    <select [(ngModel)]="dummy.creature_type.id" (ngModelChange)="getSubTypeList($event)" name="creature_type" class="form-control" id="creature_type">
+                    <!-- <select [(ngModel)]="dummy.creature_type.id" (ngModelChange)="getSubTypeList($event)" name="creature_type" class="form-control" id="creature_type">
                       <option *ngFor="let type of typeList" [value]="type.id">{{type.type}}</option>
-                    </select>
+                    </select> -->
+                    <ng-multiselect-dropdown
+                        [placeholder]= "' '"
+                        [data]= "typeList"
+                        [(ngModel)]= "dummy.creature_type"
+                        [settings]= "typeDropdownSettings"
+                        (onSelect)= "getSubTypeList($event)"
+                        name = "creature_type"
+                      >
+                      </ng-multiselect-dropdown>
                 </div>
                 <!-- Monster Sub Type if any -->
                 <div class="col-4">
                     <label for="subtypes">Creature Subtype</label>
-                    <select [(ngModel)]="dummy.creature_type.subtypes[0].id" name ="subtype" class="form-control" id="subtypes">>
-                      <option>-</option>
-                      <option *ngFor="let sub of subTypeList" [value]="sub.id">{{sub.type}}</option>
-                    </select>
+                    <ng-multiselect-dropdown
+                        [placeholder]= "' '"
+                        [data]= "subTypeList"
+                        [(ngModel)]= "dummy.creature_type.subtype"
+                        [settings]= "subTypeDropdownSettings"
+                        name = "creature_type.subtype"
+                      >
+                      </ng-multiselect-dropdown>
                 </div>
               </div>
             </div>
@@ -145,23 +158,38 @@
                 <!-- Alignment -->
                 <div class="col-4">
                     <label for="alignment">Alignment</label>
-                    <select [(ngModel)]="dummy.alignment.id" name="alignment" class="form-control" id="alignment">
-                      <option *ngFor="let alignment of alignmentList" [value]="alignment.id">{{alignment.alignment}}</option>
-                    </select>
+                    <ng-multiselect-dropdown
+                        [placeholder]= "' '"
+                        [data]= "alignmentList"
+                        [(ngModel)]= "dummy.alignment"
+                        [settings]= "alignmentDropdownSettings"
+                        name = "alignment"
+                      >
+                    </ng-multiselect-dropdown>
                 </div>
                 <!-- Size -->
                 <div class="col-4">
                     <label for="creature_size">Creature Size</label>
-                    <select class="form-control" id="creature_size">
-                      <option *ngFor="let size of sizeList">{{size.creature_size}}</option>
-                    </select>
+                    <ng-multiselect-dropdown
+                        [placeholder]= "' '"
+                        [data]= "sizeList"
+                        [(ngModel)]= "dummy.creature_size"
+                        [settings]= "sizeDropdownSettings"
+                        name = "size"
+                      >
+                    </ng-multiselect-dropdown>
                 </div>
                 <!-- Languages -->
                 <div class="col-4">
                     <label for="languages">Languages</label>
-                    <select class="form-control" id="languages">
-                      <option *ngFor="let lang of languageList">{{lang.name}}</option>
-                    </select>
+                    <ng-multiselect-dropdown
+                        [placeholder]= "' '"
+                        [data]= "languageList"
+                        [(ngModel)]= "dummy.languages"
+                        [settings]= "languageDropdownSettings"
+                        name = "language"
+                      >
+                      </ng-multiselect-dropdown>
                 </div>
               </div>
             </div>
@@ -171,30 +199,50 @@
                   <!-- Damage Vulnerability -->
                   <div class="col-3">
                       <label for="damageVulnerability">Damage Vulnerability</label>
-                      <select class="form-control" id="damageVulnerability">
-                        <option *ngFor="let vul of damageTypeList">{{vul.name}}</option>
-                      </select>
+                      <ng-multiselect-dropdown
+                        [placeholder]= "' '"
+                        [data]= "damageTypeList"
+                        [(ngModel)]= "dummy.Vulnerability"
+                        [settings]= "damageTypeDropdownSettings"
+                        name = "damageVulnerability"
+                      >
+                      </ng-multiselect-dropdown>
                   </div>
                   <!-- Damage Resistance -->
                   <div class="col-3">
                       <label for="damageResistance">Damage Resistance</label>
-                      <select class="form-control" id="damageResistance">
-                        <option *ngFor="let res of damageTypeList">{{res.name}}</option>
-                      </select>
+                      <ng-multiselect-dropdown
+                        [placeholder]= "' '"
+                        [data]= "damageTypeList"
+                        [(ngModel)]= "dummy.damageResistance"
+                        [settings]= "damageTypeDropdownSettings"
+                        name = "damageResistance"
+                      >
+                      </ng-multiselect-dropdown>
                   </div>
                   <!-- Damage Immunity -->
                   <div class="col-3">
                       <label for="damageImmunity">Damage Immunity</label>
-                      <select class="form-control" id="damageImmunity">
-                        <option *ngFor="let imm of damageTypeList">{{imm.name}}</option>
-                      </select>
+                      <ng-multiselect-dropdown
+                        [placeholder]= "' '"
+                        [data]= "damageTypeList"
+                        [(ngModel)]= "dummy.damageImmunity"
+                        [settings]= "damageTypeDropdownSettings"
+                        name = "damageImmunity"
+                      >
+                      </ng-multiselect-dropdown>
                   </div>
                   <!-- Condition Immunity -->
                   <div class="col-3">
                       <label for="conditionImmunity">Condition Immunity</label>
-                      <select class="form-control" id="conditionImmunity">
-                        <option *ngFor="let con of conditionList">{{con.name}}</option>
-                      </select>
+                      <ng-multiselect-dropdown
+                        [placeholder]= "' '"
+                        [data]= "conditionList"
+                        [(ngModel)]= "dummy.conditionImmunity"
+                        [settings]= "conditionDropdownSettings"
+                        name = "damageImmunity"
+                      >
+                      </ng-multiselect-dropdown>
                   </div>
                 </div>
               </div>
@@ -204,15 +252,28 @@
                   <!-- Speeds -->
                   <div class="col">
                       <label for="speeds">Speeds</label>
-                      <select class="form-control" id="speeds">
-                        <option *ngFor="let speed of speedList">{{speed.speed}}</option>
-                      </select>
+                      <ng-multiselect-dropdown
+                        [placeholder]= "' '"
+                        [data]= "speedList"
+                        [(ngModel)]= "dummy.speeds"
+                        [settings]= "speedDropdownSettings"
+                        name = "speed"
+                      >
+                      </ng-multiselect-dropdown>
                   </div>
                   <div class="col">
                       <label for="senses">Senses</label>
-                      <select class="form-control" id="senses">
+                      <!-- <select class="form-control" id="senses">
                         <option *ngFor="let sense of senseList">{{sense.sense}}</option>
-                      </select>
+                      </select> -->
+                      <ng-multiselect-dropdown
+                        [placeholder]= "' '"
+                        [data]= "senseList"
+                        [(ngModel)]= "dummy.senses"
+                        [settings]= "senseDropdownSettings"
+                        name = "sense"
+                      >
+                      </ng-multiselect-dropdown>
                   </div>
                 </div>
               </div>
@@ -233,8 +294,38 @@
               <div class="container">
                 <hr>
               </div>
-              <div *ngFor="let trait of traitsComponents; let i = index">
-                <app-trait-card [traitNo]="i" (removeTrait)="removeTrait($event)"></app-trait-card>
+              <div *ngFor="let trait of traitsComponents; let i = index" ngModelGroup="trait">
+                <div class="form-group">
+                  <!-- <app-trait-card 
+                    [traitNo]="i" 
+                    [form] = "monsterForm"
+                    (removeTrait)="removeTrait($event)"
+                  >
+                  </app-trait-card> -->
+                  <div class="row">
+                      <div class="col">
+                          <label for="reaction_name{{reactionNo}}">Name</label>
+                          <input 
+                              type="text" class="form-control" 
+                              id="reaction_name{{reactionNo}}" 
+                              aria-describedby="reaction_name" 
+                              placeholder="Run"
+                              name = "name"
+                              [(ngModel)]= "dummy.traits[0].name">
+                      </div>
+                      <div class="col-1">
+                          <button class="btn btn-dark btn-block btn-sm" (click)="removeMe()"><i class="fas fa-minus-square"></i></button>
+                      </div>
+                  </div>
+                  <label for="reaction_description{{reactionNo}}">Description</label>
+                  <textarea 
+                      class="form-control" 
+                      id="reaction_description{{reactionNo}}" 
+                      rows="3"
+                      name="description"
+                  >
+                  </textarea>
+                </div>
               </div>
               <!-- Actions -->
               <div class="row">
@@ -296,5 +387,7 @@
       {{monsterForm.value | json}}
       <hr>
       {{dummy | json}}
+      <br>
+      
   </div>
 </div>

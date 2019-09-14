@@ -7,22 +7,23 @@ import { DamageType } from './damage-type';
 import { Sense } from './sense';
 import { Speed } from './speed';
 import { Condition } from './condition';
+import { CreatureType } from './creature-type';
 
 export class Monster {
     // from the database
-    name: string;
+    name: String;
     strength: number;
     dexterity: number;
-    constitution: Number;
-    intelligence: Number;
+    constitution: number;
+    intelligence: number;
     wisdom: number;
     charisma: number;
     armor_class: number;
     hit_points: number;
-    hit_dice: string;
+    hit_dice: String;
     savingThrows: [];
     challenge_rating: ChallengeRating;
-    creature_type: Type;
+    creature_type: CreatureType;
     alignment: Alignment;
     creature_size: Size;
     languages = new Array<Language>();
@@ -40,11 +41,11 @@ export class Monster {
     skills = new Array<any>();
     image: Blob;
     // used in the front end;
-    faction: string;
-    initiative: number;
-    combathp: number;
-    combatac: number;
-    combatpp: number;
+    faction: String;
+    initiative: Number;
+    combathp: Number;
+    combatac: Number;
+    combatpp: Number;
 }
 
 

@@ -44,7 +44,7 @@ export class TrackerComponent implements OnInit {
       // roll die for initiative
       const roll = Math.round(Math.random() * 19) + 1;
       // calculate dex mod and add to roll
-      combatant.initiative = Math.floor((combatant.dexterity - 10) / 2) + roll;
+      combatant.initiative = Math.floor((combatant.dexterity - 10 ) / 2) + roll;
       // set the hit point pool to be used in combat to average value
       combatant.combathp = combatant.hit_points;
       // set combat ac to start value to allow for fluctation
