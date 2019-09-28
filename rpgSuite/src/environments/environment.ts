@@ -13,7 +13,8 @@ export const environment = {
   damage_typeUrl: 'http://localhost:3434/damage_type',
   conditionUrl: 'http://localhost:3434/condition',
   senseUrl: 'http://localhost:3434/sense',
-  typeUrl: 'http://localhost:3434/type'
+  typeUrl: 'http://localhost:3434/type',
+  skillUrl: 'http://localhost:3434/skill'
 };
 
 /*

@@ -158,12 +158,14 @@ class monster {
     damageResistance = [];
     damageImmunity= [];
     conditionImmunity= [];
+	subtype;
 }
 
 function setMonster(creature, m) {
     creature.name = m.name;
     checkSize(m.size, creature);
     checkType(m.type, creature);
+	checkSubType(m.subtype, creature);
     checkAlign(m.alignment,creature);
     checkSaves(creature, m);
     checkSkills(creature, m);
@@ -176,7 +178,7 @@ function setMonster(creature, m) {
     creature.intelligence = m.intelligence;
     creature.charisma = m.charisma;
     creature.armor_class = m.armor_class;
-    creature.challenge_rating = String(m.challenge_rating);
+    creature.challenge_rating = {cr:String(m.challenge_rating)};
     for (let abil in m.special_abilities) {
         var abili = m.special_abilities[abil];
         var t = new cTraits(abili.name, abili.desc);
@@ -288,6 +290,217 @@ function checkType(type, creature) {
         }
     }
 }
+
+function checkSubType(subtype, creature){
+	switch(subtype){
+		case "": {
+            creature.subtype = null;
+            break;
+        }
+		case "aarakocra": {
+            creature.subtype = { "id": 1 };
+            break;
+        }
+		case "any race": {
+            creature.subtype = { "id": 2 };
+            break;
+        }
+		case "bullywug": {
+            creature.subtype = { "id": 3 };
+            break;
+        }
+		case "derro": {
+            creature.subtype = { "id": 4 };
+            break;
+        }
+		case "dragonborn": {
+            creature.subtype = { "id": 5 };
+            break;
+        }
+		case "dwarf": {
+            creature.subtype = { "id": 6 };
+            break;
+        }
+		case "elf": {
+            creature.subtype = { "id": 7 };
+            break;
+        }
+		case "firenewt": {
+            creature.subtype = { "id": 8 };
+            break;
+        }
+		case "gith": {
+            creature.subtype = { "id": 9 };
+            break;
+        }
+		case "gnoll": {
+            creature.subtype = { "id": 10 };
+            break;
+        }
+		case "goblinoid": {
+            creature.subtype = { "id": 11 };
+            break;
+        }
+		case "grimlock": {
+            creature.subtype = { "id": 12 };
+            break;
+        }
+		case "grung": {
+            creature.subtype = { "id": 13 };
+            break;
+        }
+		case "half-dragon": {
+            creature.subtype = { "id": 14 };
+            break;
+        }
+		case "half-elf": {
+            creature.subtype = { "id": 15 };
+            break;
+        }
+		case "halfling": {
+            creature.subtype = { "id": 16 };
+            break;
+        }
+		case "half-orc": {
+            creature.subtype = { "id": 17 };
+            break;
+		}
+		case "human": {
+            creature.subtype = { "id": 18 };
+            break;
+		}
+		case "kenku": {
+            creature.subtype = { "id": 19 };
+            break;
+        }
+		case "kobold": {
+            creature.subtype = { "id": 20 };
+            break;
+        }
+		case "kraul": {
+            creature.subtype = { "id": 21 };
+            break;
+        }
+		case "kuo-toa": {
+            creature.subtype = { "id": 22 };
+            break;
+        }
+		case "lizardfolk": {
+            creature.subtype = { "id": 23 };
+            break;
+        }
+		case "locathah": {
+            creature.subtype = { "id": 24 };
+            break;
+        }
+		case "meazel": {
+            creature.subtype = { "id": 25 };
+            break;
+        }
+		case "merfolk": {
+            creature.subtype = { "id": 26 };
+            break;
+        }
+		case "nagpa": {
+            creature.subtype = { "id": 27 };
+            break;
+        }
+		case "orc": {
+            creature.subtype = { "id": 28 };
+            break;
+        }
+		case "quaggoth": {
+            creature.subtype = { "id": 29 };
+            break;
+        }
+		case "simic hybrid": {
+            creature.subtype = { "id": 30 };
+            break;
+        }
+		case "sahuagin": {
+            creature.subtype = { "id": 31 };
+            break;
+        }
+		case "saurial": {
+            creature.subtype = { "id": 32 };
+            break;
+        }
+		case "tiefling": {
+            creature.subtype = { "id": 33 };
+            break;
+        }
+		case "tortle": {
+            creature.subtype = { "id": 34 };
+            break;
+        }
+		case "triton": {
+            creature.subtype = { "id": 35 };
+            break;
+        }
+		case "yuan-ti": {
+            creature.subtype = { "id": 36 };
+            break;
+        }
+		case "xvart": {
+            creature.subtype = { "id": 37 };
+            break;
+        }
+		case "angel": {
+            creature.subtype = { "id": 38 };
+            break;
+        }
+		case "titan": {
+            creature.subtype = { "id": 39 };
+            break;
+        }
+		case "cloud giant": {
+            creature.subtype = { "id": 40 };
+            break;
+        }
+		case "fire giant": {
+            creature.subtype = { "id": 41 };
+            break;
+        }
+		case "frost giant": {
+            creature.subtype = { "id": 42 };
+            break;
+        }
+		case "hill giant": {
+            creature.subtype = { "id": 43 };
+            break;
+        }
+		case "stone giant": {
+            creature.subtype = { "id": 44 };
+            break;
+        }
+		case "storm giant": {
+            creature.subtype = { "id": 45 };
+            break;
+        }
+		case "demon": {
+            creature.subtype = { "id": 46 };
+            break;
+        }
+		case "devil": {
+            creature.subtype = { "id": 47 };
+            break;
+        }
+		case "yagnoloth": {
+            creature.subtype = { "id": 48 };
+            break;
+        }
+		case "shapechanger": {
+            creature.subtype = { "id": 50 };
+            break;
+        }
+		case "inevitable": {
+            creature.subtype = { "id": 51 };
+            break;
+        }
+		
+	}
+}
+
 function checkAlign(align, creature) {
     switch (align) {
         case "lawful good": {

@@ -1,8 +1,17 @@
+<div ngFormGroup="trait">
 <div class="form-group">
     <div class="row">
         <div class="col">
             <label for="traitName{{traitNo}}">Name</label>
-            <input type="text" class="form-control" id="traitName{{traitNo}}" aria-describedby="traitName" placeholder="Sticky">
+            <input 
+                type="text" 
+                class="form-control" 
+                id="traitName{{traitNo}}" 
+                aria-describedby="traitName" 
+                placeholder="Sticky"
+                name="name"
+                [(ngModel)]="dummy.traits"
+            >
         </div>
         <div class="col-1">
             <button class="btn btn-dark btn-block btn-sm" (click)="removeMe()"><i class="fas fa-minus-square"></i></button>
@@ -10,4 +19,5 @@
     </div>
     <label for="traitDescription{{traitNo}}">Description</label>
     <textarea class="form-control" id="traitDescription{{traitNo}}" rows="3"></textarea>
+</div>
 </div>

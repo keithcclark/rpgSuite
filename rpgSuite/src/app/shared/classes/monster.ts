@@ -8,6 +8,8 @@ import { Sense } from './sense';
 import { Speed } from './speed';
 import { Condition } from './condition';
 import { CreatureType } from './creature-type';
+import { Subtype } from './subtype';
+import { SkillProf } from './skill-prof';
 
 export class Monster {
     // from the database
@@ -24,6 +26,7 @@ export class Monster {
     savingThrows: [];
     challenge_rating: ChallengeRating;
     creature_type: CreatureType;
+    creature_subtype: Subtype;
     alignment: Alignment;
     creature_size: Size;
     languages = new Array<Language>();
@@ -38,7 +41,7 @@ export class Monster {
     conditionImmunity = new Array<Condition>();
     senses = new Array<Sense>();
     speeds = new Array<Speed>();
-    skills = new Array<any>();
+    skills = new Array<SkillProf>();
     image: Blob;
     // used in the front end;
     faction: String;

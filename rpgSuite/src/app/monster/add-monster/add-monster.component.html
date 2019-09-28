@@ -1,393 +1,534 @@
-
 <!--
   Purpose: Present a form to the user to information about a moster to be added to the data base
 -->
-<div class="row">
-  <div class="col-9">
-      <form #monsterForm = "ngForm">
-          <div class="container mb-5 border">
-          <!-- Basic Info Identifier -->
+<form #monsterForm="ngForm">
+  <div class="container mb-5 border">
+    <!-- Basic Info Identifier -->
+    <div class="row">
+      <div class="col-10">
+        <h2>BASIC INFORMATION</h2>
+      </div>
+      <div class="col-2">
+        * Required
+      </div>
+    </div>
+    <div class="container">
+      <small>
+        Start by entering basic details for your homebrew monster below. You will be able to
+        provide more relevant details once it is created to take advantage of advanced search, filtering, and character
+        features.
+        <hr>
+      </small>
+    </div>
+    <!-- Monster Name -->
+    <div class="form-group">
+      <label for="MonsterName">Monster Name</label>
+      <input [(ngModel)]="dummy.name" name="name" type="text" class="form-control" id="mName" aria-describedby="mNmae"
+        placeholder="DoomBeast">
+    </div>
+    <!-- Monster Ability Scores -->
+    <div class="form-group">
+      <div class="row">
+        <!-- Strength -->
+        <div class="col-2">
+          <label for="strScore" class="">STR </label>
+          <input [(ngModel)]="dummy.strength" name="strength" type="number" class="form-control" id="strScore"
+            placeholder="10">
+          <!-- Strenght saving throw proficiency -->
+          <div class="text-center">
+            <input type="checkbox" class="form-check-input" id="strSave">
+            <label class="form-check-label" for="strSave">Save</label>
+          </div>
+        </div>
+        <!-- Dexterity -->
+        <div class="col-2">
+          <label for="dexScore" class="font-weight-bold">DEX</label>
+          <input [(ngModel)]="dummy.dexterity" name="dexterity" type="number" class="form-control" id="dexScore"
+            placeholder="10">
+          <!-- Dexterity saving throw proficiency -->
+          <div class="text-center">
+            <input type="checkbox" class="form-check-input" id="dexSave">
+            <label class="form-check-label" for="dexSave">Save</label>
+          </div>
+        </div>
+        <!-- Constitution -->
+        <div class="col-2">
+          <label for="conScore" class="font-weight-bold">CON</label>
+          <input [(ngModel)]="dummy.constitution" name="constitution" type="number" class="form-control" id="conScore"
+            placeholder="10">
+          <!-- Constitution saving throw proficiency -->
+          <div class="text-center">
+            <input type="checkbox" class="form-check-input" id="conSave">
+            <label class="form-check-label" for="conSave">Save</label>
+          </div>
+        </div>
+        <!-- Intelligence -->
+        <div class="col-2">
+          <label for="intScore" class="font-weight-bold">INT </label>
+          <input [(ngModel)]="dummy.intelligence" name="intelligence" type="number" class="form-control" id="intScore"
+            placeholder="10">
+          <!--  Intelligence saving throw proficiency -->
+          <div class="text-center">
+            <input type="checkbox" class="form-check-input" id="intSave">
+            <label class="form-check-label" for="intSave">Save</label>
+          </div>
+        </div>
+        <!-- Wisdom -->
+        <div class="col-2">
+          <label for="wisScore" class="font-weight-bold">WIS</label>
+          <input [(ngModel)]="dummy.wisdom" name="wisdom" type="number" class="form-control" id="wisScore"
+            placeholder="10">
+          <!-- Wisdom saving throw proficiency -->
+          <div class="text-center">
+            <input type="checkbox" class="form-check-input" id="wisSave">
+            <label class="form-check-label" for="wisSave">Save</label>
+          </div>
+        </div>
+        <!-- Charisma  -->
+        <div class="col-2">
+          <label for="chrScore" class="font-weight-bold">CHR</label>
+          <input [(ngModel)]="dummy.charisma" name="charisma" type="number" class="form-control" id="chrScore"
+            placeholder="10">
+          <!-- Charisma saving throw proficiency -->
+          <div class="text-center">
+            <input type="checkbox" class="form-check-input" id="chrSave">
+            <label class="form-check-label" for="chrSave">Save</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Basic combat stats -->
+    <div class="form-group">
+      <div class="row">
+        <!-- Armor Class -->
+        <div class="col-4">
+          <label for="armor_class" class="">Armor Class </label>
+          <input [(ngModel)]="dummy.armor_class" name=armor_class type="number" class="form-control" id="armor_class"
+            placeholder="10">
+        </div>
+        <!-- Hit Points -->
+        <div class="col-4">
+          <label for="hit_points" class="">Hit Points </label>
+          <input [(ngModel)]="dummy.hit_points" name="hit_points" type="number" class="form-control" id="hit_points"
+            placeholder="10">
+        </div>
+        <!-- Hit Dice -->
+        <div class="col-4">
+          <label for="hit_dice" class="">Hit Dice</label>
+          <input [(ngModel)]="dummy.hit_dice" name="hit_dice" type="text" class="form-control" id="hit_dice"
+            placeholder="3d6">
+        </div>
+      </div>
+    </div>
+    <!-- CR and type -->
+    <div class="form-group">
+      <div class="row">
+        <!-- CR -->
+        <div class="col-4">
+          <label for="challenge_rating">Challenge Rating</label>
+          <select [(ngModel)]="dummy.challenge_rating.cr" name="challenge_rating" class="form-control"
+            id="challenge_rating">
+            <option *ngFor="let cr of crList" [value]="cr.cr">{{cr.cr | fractions}}</option>
+          </select>
+        </div>
+        <!-- Monster Type -->
+        <div class="col-4">
+          <label for="creature_type">Creature Type</label>
+          <ng-multiselect-dropdown [placeholder]="' '" [data]="typeList" [(ngModel)]="dummy.creature_type"
+            [settings]="typeDropdownSettings" (onSelect)="getSubTypeList($event)" name="creature_type">
+          </ng-multiselect-dropdown>
+        </div>
+        <!-- Monster Sub Type if any -->
+        <div class="col-4">
+          <label for="subtypes">Creature Subtype</label>
+          <ng-multiselect-dropdown [placeholder]="' '" [data]="subTypeList" [(ngModel)]="dummy.creature_type.subtype"
+            [settings]="subTypeDropdownSettings" name="creature_type.subtype">
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+    </div>
+    <!-- Alignment Size and Languages -->
+    <div class="form-group">
+      <div class="row">
+        <!-- Alignment -->
+        <div class="col-4">
+          <label for="alignment">Alignment</label>
+          <ng-multiselect-dropdown [placeholder]="' '" [data]="alignmentList" [(ngModel)]="dummy.alignment"
+            [settings]="alignmentDropdownSettings" name="alignment">
+          </ng-multiselect-dropdown>
+        </div>
+        <!-- Size -->
+        <div class="col-4">
+          <label for="creature_size">Creature Size</label>
+          <ng-multiselect-dropdown [placeholder]="' '" [data]="sizeList" [(ngModel)]="dummy.creature_size"
+            [settings]="sizeDropdownSettings" name="size">
+          </ng-multiselect-dropdown>
+        </div>
+        <!-- Languages -->
+        <div class="col-4">
+          <label for="languages">Languages</label>
+          <ng-multiselect-dropdown [placeholder]="' '" [data]="languageList" [(ngModel)]="dummy.languages"
+            [settings]="languageDropdownSettings" name="language">
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+    </div>
+    <!-- Damage and Condtion vulnerability, resistance, and immunity  -->
+    <div class="form-group">
+      <div class="row">
+        <!-- Damage Vulnerability -->
+        <div class="col-3">
+          <label for="damageVulnerability">Damage Vulnerability</label>
+          <ng-multiselect-dropdown [placeholder]="' '" [data]="damageTypeList" [(ngModel)]="dummy.Vulnerability"
+            [settings]="damageTypeDropdownSettings" name="damageVulnerability">
+          </ng-multiselect-dropdown>
+        </div>
+        <!-- Damage Resistance -->
+        <div class="col-3">
+          <label for="damageResistance">Damage Resistance</label>
+          <ng-multiselect-dropdown [placeholder]="' '" [data]="damageTypeList" [(ngModel)]="dummy.damageResistance"
+            [settings]="damageTypeDropdownSettings" name="damageResistance">
+          </ng-multiselect-dropdown>
+        </div>
+        <!-- Damage Immunity -->
+        <div class="col-3">
+          <label for="damageImmunity">Damage Immunity</label>
+          <ng-multiselect-dropdown [placeholder]="' '" [data]="damageTypeList" [(ngModel)]="dummy.damageImmunity"
+            [settings]="damageTypeDropdownSettings" name="damageImmunity">
+          </ng-multiselect-dropdown>
+        </div>
+        <!-- Condition Immunity -->
+        <div class="col-3">
+          <label for="conditionImmunity">Condition Immunity</label>
+          <ng-multiselect-dropdown [placeholder]="' '" [data]="conditionList" [(ngModel)]="dummy.conditionImmunity"
+            [settings]="conditionDropdownSettings" name="damageImmunity">
+          </ng-multiselect-dropdown>
+        </div>
+      </div>
+    </div>
+    <!-- Speed and Senses -->
+    <div class="form-group">
+      <div class="row">
+        <!-- Speeds -->
+        <div class="col">
           <div class="row">
-            <div class="col-10">
-                <h2>BASIC INFORMATION</h2>
+            <div class="col">
+              <label>Speeds</label>
             </div>
-            <div class="col-2">
-                * Required
+            <div class="col-2 mb-2">
+              <button class="btn btn-dark btn-block btn-sm" (click)="openSpeedSenseModal(addspeed)"><i
+                  class="fas fa-plus-square"></i></button>
             </div>
           </div>
-          <div class="container">
-              <small>
-                  Start by entering basic details for your homebrew monster below. You will be able to 
-                  provide more relevant details once it is created to take advantage of advanced search, filtering, and character features.
-                  <hr>
-              </small>
+          <table class="table table-sm table-hover table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Speed</th>
+                <th scope="col">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let speed of dummy.speeds; let i = index">
+                <td>{{speed.speed}}</td>
+                <td>
+                  <input type="number" disabled id="sValue{{i}}" (blur)="disableSvalue(i)"
+                    name="speed{{i}}" [(ngModel)]="dummy.speeds[i].distance">
+                </td>
+                <td><a [routerLink]="none" (click)="enableSvalue(i)">Edit</a> | <a [routerLink]="none"
+                    (click)="removeSpeed(i)">Delete</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col">
+              <label>Senses</label>
+            </div>
+            <div class="col-2 mb-2">
+              <button class="btn btn-dark btn-block btn-sm" (click)="openSpeedSenseModal(addsense)"><i
+                  class="fas fa-plus-square"></i></button>
+            </div>
           </div>
-          <!-- Monster Name -->
-            <div class="form-group">
-              <label for="MonsterName">Monster Name</label>
-              <input [(ngModel)]="dummy.name" name="name" type="text" class="form-control" id="mName" aria-describedby="mNmae" placeholder="DoomBeast">
-            </div>
-            <!-- Monster Ability Scores -->
-            <div class="form-group">
+          <table class="table table-sm table-hover table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Sense</th>
+                <th scope="col">Distance</th>
+                <th scope="col">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sense of dummy.senses; let i = index">
+                <td>{{sense.sense}}</td>
+                <td>
+                  <input type="number" disabled id="seValue{{i}}" (blur)="disableSeValue(i)"
+                    name="sense{{i}}" [(ngModel)]="dummy.senses[i].distance">
+                </td>
+                <td><a [routerLink]="none" (click)="enableSeValue(i)">Edit</a> | <a [routerLink]="none"
+                    (click)="removeSense(i)">Delete</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <!-- Traits, Actions, and Skills -->
+    <div class="row">
+      <div class="col-9">
+        <!-- Traits -->
+        <div class="row">
+          <div class="col">
+            <h2>TRAITS</h2>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-dark btn-block btn-sm" (click)="addTrait()"><i
+                class="fas fa-plus-square"></i></button>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <hr>
+        </div>
+        <div [formGroup]="traitFG">
+          <div class="form-group">
+            <div formArrayName="extraTraits" *ngFor="let trait of ExtraTraits.controls; let i = index" class="mt-2">
               <div class="row">
-                <!-- Strength -->
-                <div class="col-2">
-                    <label for="strScore" class="">STR </label> 
-                    <input [(ngModel)]="dummy.strength" name="strength" type="number" class="form-control" id="strScore" placeholder="10">
-                    <!-- Strenght saving throw proficiency -->
-                    <div class="text-center">
-                        <input type="checkbox" class="form-check-input" id="strSave">
-                        <label class="form-check-label" for="strSave">Save</label>
-                    </div>
-                </div>
-                <!-- Dexterity -->
-                <div class="col-2">
-                    <label for="dexScore" class="font-weight-bold">DEX</label>
-                    <input [(ngModel)]="dummy.dexterity" name="dexterity" type="number" class="form-control" id="dexScore" placeholder="10">
-                    <!-- Dexterity saving throw proficiency -->
-                    <div class="text-center">
-                        <input type="checkbox" class="form-check-input" id="dexSave">
-                        <label class="form-check-label" for="dexSave">Save</label>
-                    </div>
-                </div>
-                <!-- Constitution -->
-                <div class="col-2">
-                    <label for="conScore" class="font-weight-bold">CON</label>
-                    <input [(ngModel)]="dummy.constitution" name="constitution" type="number" class="form-control" id="conScore" placeholder="10">
-                    <!-- Constitution saving throw proficiency -->
-                    <div class="text-center">
-                        <input type="checkbox" class="form-check-input" id="conSave">
-                        <label class="form-check-label" for="conSave">Save</label>
-                    </div>
-                </div>
-                <!-- Intelligence -->
-                <div class="col-2">
-                    <label for="intScore" class="font-weight-bold">INT </label>
-                    <input [(ngModel)]="dummy.intelligence" name="intelligence" type="number" class="form-control" id="intScore" placeholder="10">
-                    <!--  Intelligence saving throw proficiency -->
-                    <div class="text-center">
-                        <input type="checkbox" class="form-check-input" id="intSave">
-                        <label class="form-check-label" for="intSave">Save</label>
-                    </div>
-                </div>
-                <!-- Wisdom -->
-                <div class="col-2">
-                    <label for="wisScore" class="font-weight-bold">WIS</label>
-                    <input [(ngModel)]="dummy.wisdom" name="wisdom" type="number" class="form-control" id="wisScore" placeholder="10">
-                    <!-- Wisdom saving throw proficiency -->
-                    <div class="text-center">
-                        <input type="checkbox" class="form-check-input" id="wisSave">
-                        <label class="form-check-label" for="wisSave">Save</label>
-                    </div>
-                </div>
-                <!-- Charisma  -->
-                <div class="col-2">
-                    <label for="chrScore" class="font-weight-bold">CHR</label>
-                    <input [(ngModel)]="dummy.charisma" name="charisma" type="number" class="form-control" id="chrScore" placeholder="10">
-                    <!-- Charisma saving throw proficiency -->
-                    <div class="text-center">
-                        <input type="checkbox" class="form-check-input" id="chrSave">
-                        <label class="form-check-label" for="chrSave">Save</label>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <!-- Basic combat stats -->
-            <div class="form-group">
-              <div class="row">
-                <!-- Armor Class -->
-                <div class="col-4">
-                  <label for="armor_class" class="">Armor Class </label> 
-                  <input [(ngModel)]="dummy.armor_class" name=armor_class type="number" class="form-control" id="armor_class" placeholder="10">
-                </div>
-                <!-- Hit Points -->
-                <div class="col-4">
-                  <label for="hit_points" class="">Hit Points </label> 
-                  <input [(ngModel)]="dummy.hit_points" name = "hit_points" type="number" class="form-control" id="hit_points" placeholder="10">
-                </div>
-                <!-- Hit Dice -->
-                <div class="col-4">
-                  <label for="hit_dice" class="">Hit Dice</label> 
-                 <input [(ngModel)]="dummy.hit_dice" name="hit_dice" type="text" class="form-control" id="hit_dice" placeholder="3d6">
-                </div>
-              </div>
-            </div>
-            <!-- CR and type -->
-            <div class="form-group">
-              <div class="row">
-                <!-- CR -->
-                <div class="col-4">
-                    <label for="challenge_rating">Challenge Rating</label>
-                    <select [(ngModel)]="dummy.challenge_rating.cr" name="challenge_rating" class="form-control" id="challenge_rating" >
-                      <option *ngFor="let cr of crList" [value]="cr.cr">{{cr.cr | fractions}}</option>
-                    </select>
-                </div>
-                <!-- Monster Type -->
-                <div class="col-4">
-                    <label for="creature_type">Creature Type</label>
-                    <!-- <select [(ngModel)]="dummy.creature_type.id" (ngModelChange)="getSubTypeList($event)" name="creature_type" class="form-control" id="creature_type">
-                      <option *ngFor="let type of typeList" [value]="type.id">{{type.type}}</option>
-                    </select> -->
-                    <ng-multiselect-dropdown
-                        [placeholder]= "' '"
-                        [data]= "typeList"
-                        [(ngModel)]= "dummy.creature_type"
-                        [settings]= "typeDropdownSettings"
-                        (onSelect)= "getSubTypeList($event)"
-                        name = "creature_type"
-                      >
-                      </ng-multiselect-dropdown>
-                </div>
-                <!-- Monster Sub Type if any -->
-                <div class="col-4">
-                    <label for="subtypes">Creature Subtype</label>
-                    <ng-multiselect-dropdown
-                        [placeholder]= "' '"
-                        [data]= "subTypeList"
-                        [(ngModel)]= "dummy.creature_type.subtype"
-                        [settings]= "subTypeDropdownSettings"
-                        name = "creature_type.subtype"
-                      >
-                      </ng-multiselect-dropdown>
-                </div>
-              </div>
-            </div>
-            <!-- Alignment Size and Languages -->
-            <div class="form-group">
-              <div class="row">
-                <!-- Alignment -->
-                <div class="col-4">
-                    <label for="alignment">Alignment</label>
-                    <ng-multiselect-dropdown
-                        [placeholder]= "' '"
-                        [data]= "alignmentList"
-                        [(ngModel)]= "dummy.alignment"
-                        [settings]= "alignmentDropdownSettings"
-                        name = "alignment"
-                      >
-                    </ng-multiselect-dropdown>
-                </div>
-                <!-- Size -->
-                <div class="col-4">
-                    <label for="creature_size">Creature Size</label>
-                    <ng-multiselect-dropdown
-                        [placeholder]= "' '"
-                        [data]= "sizeList"
-                        [(ngModel)]= "dummy.creature_size"
-                        [settings]= "sizeDropdownSettings"
-                        name = "size"
-                      >
-                    </ng-multiselect-dropdown>
-                </div>
-                <!-- Languages -->
-                <div class="col-4">
-                    <label for="languages">Languages</label>
-                    <ng-multiselect-dropdown
-                        [placeholder]= "' '"
-                        [data]= "languageList"
-                        [(ngModel)]= "dummy.languages"
-                        [settings]= "languageDropdownSettings"
-                        name = "language"
-                      >
-                      </ng-multiselect-dropdown>
-                </div>
-              </div>
-            </div>
-            <!-- Damage and Condtion vulnerability, resistance, and immunity  -->
-            <div class="form-group">
-                <div class="row">
-                  <!-- Damage Vulnerability -->
-                  <div class="col-3">
-                      <label for="damageVulnerability">Damage Vulnerability</label>
-                      <ng-multiselect-dropdown
-                        [placeholder]= "' '"
-                        [data]= "damageTypeList"
-                        [(ngModel)]= "dummy.Vulnerability"
-                        [settings]= "damageTypeDropdownSettings"
-                        name = "damageVulnerability"
-                      >
-                      </ng-multiselect-dropdown>
-                  </div>
-                  <!-- Damage Resistance -->
-                  <div class="col-3">
-                      <label for="damageResistance">Damage Resistance</label>
-                      <ng-multiselect-dropdown
-                        [placeholder]= "' '"
-                        [data]= "damageTypeList"
-                        [(ngModel)]= "dummy.damageResistance"
-                        [settings]= "damageTypeDropdownSettings"
-                        name = "damageResistance"
-                      >
-                      </ng-multiselect-dropdown>
-                  </div>
-                  <!-- Damage Immunity -->
-                  <div class="col-3">
-                      <label for="damageImmunity">Damage Immunity</label>
-                      <ng-multiselect-dropdown
-                        [placeholder]= "' '"
-                        [data]= "damageTypeList"
-                        [(ngModel)]= "dummy.damageImmunity"
-                        [settings]= "damageTypeDropdownSettings"
-                        name = "damageImmunity"
-                      >
-                      </ng-multiselect-dropdown>
-                  </div>
-                  <!-- Condition Immunity -->
-                  <div class="col-3">
-                      <label for="conditionImmunity">Condition Immunity</label>
-                      <ng-multiselect-dropdown
-                        [placeholder]= "' '"
-                        [data]= "conditionList"
-                        [(ngModel)]= "dummy.conditionImmunity"
-                        [settings]= "conditionDropdownSettings"
-                        name = "damageImmunity"
-                      >
-                      </ng-multiselect-dropdown>
-                  </div>
-                </div>
-              </div>
-              <!-- Speed and Senses -->
-              <div class="form-group">
-                <div class="row">
-                  <!-- Speeds -->
-                  <div class="col">
-                      <label for="speeds">Speeds</label>
-                      <ng-multiselect-dropdown
-                        [placeholder]= "' '"
-                        [data]= "speedList"
-                        [(ngModel)]= "dummy.speeds"
-                        [settings]= "speedDropdownSettings"
-                        name = "speed"
-                      >
-                      </ng-multiselect-dropdown>
-                  </div>
-                  <div class="col">
-                      <label for="senses">Senses</label>
-                      <!-- <select class="form-control" id="senses">
-                        <option *ngFor="let sense of senseList">{{sense.sense}}</option>
-                      </select> -->
-                      <ng-multiselect-dropdown
-                        [placeholder]= "' '"
-                        [data]= "senseList"
-                        [(ngModel)]= "dummy.senses"
-                        [settings]= "senseDropdownSettings"
-                        name = "sense"
-                      >
-                      </ng-multiselect-dropdown>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="container">
-            <!-- Traits, Actions, and Skills -->
-            <div class="row">
-              <div class="col-9">
-                 <!-- Traits -->
-            <div class="row">
                 <div class="col">
-                  <h2>TRAITS</h2> 
+                  <label for="traitName{{i}}">Name</label>
+                  <input type="text" class="form-control" id="traitName{{i}}" aria-describedby="traitName"
+                    [formControlName]="i" #traitname (keyup)="getTraitName(i, traitname.value)">
                 </div>
                 <div class="col-2">
-                    <button class="btn btn-dark btn-block btn-sm" (click)="addTrait()"><i class="fas fa-plus-square"></i></button>
+                  <button class="btn btn-dark btn-block btn-sm" (click)="removeTrait(i)"><i
+                      class="fas fa-minus-square"></i></button>
                 </div>
               </div>
-              <div class="container">
-                <hr>
+              <div class="row">
+                <div class="col">
+                  <label for="traitDescription{{traitNo}}">Description</label>
+                  <textarea class="form-control" id="traitDescription{{i}}" rows="3" [formControlName]="i" #traitDesc
+                    (keyup)=getTraitDesc(i,traitDesc.value)>
+                        </textarea>
+                </div>
               </div>
-              <div *ngFor="let trait of traitsComponents; let i = index" ngModelGroup="trait">
-                <div class="form-group">
-                  <!-- <app-trait-card 
-                    [traitNo]="i" 
-                    [form] = "monsterForm"
-                    (removeTrait)="removeTrait($event)"
-                  >
-                  </app-trait-card> -->
-                  <div class="row">
-                      <div class="col">
-                          <label for="reaction_name{{reactionNo}}">Name</label>
-                          <input 
-                              type="text" class="form-control" 
-                              id="reaction_name{{reactionNo}}" 
-                              aria-describedby="reaction_name" 
-                              placeholder="Run"
-                              name = "name"
-                              [(ngModel)]= "dummy.traits[0].name">
-                      </div>
-                      <div class="col-1">
-                          <button class="btn btn-dark btn-block btn-sm" (click)="removeMe()"><i class="fas fa-minus-square"></i></button>
-                      </div>
-                  </div>
-                  <label for="reaction_description{{reactionNo}}">Description</label>
-                  <textarea 
-                      class="form-control" 
-                      id="reaction_description{{reactionNo}}" 
-                      rows="3"
-                      name="description"
-                  >
+            </div>
+          </div>
+        </div>
+        <!-- Actions -->
+        <div class="row">
+          <div class="col">
+            <h2>ACTIONS</h2>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-dark btn-block btn-sm" (click)="addAction(i)"><i
+                class="fas fa-plus-square"></i></button>
+          </div>
+        </div>
+        <div class="container">
+          <hr>
+        </div>
+        <div [formGroup]="actionFG">
+          <div class="form-group">
+            <div formArrayName="extraActions" *ngFor="let action of extraActions.controls; let i = index" class="mt-2">
+              <div class="row">
+                <div class="col">
+                  <label for="action_name{{i}}">Name</label>
+                  <input type="text" class="form-control" id="action_name{{i}}" aria-describedby="action_name"
+                    [formControlName]="i" #actionname (keyup)="getActionName(i, actionname.value)">
+                </div>
+                <div class="col-2">
+                  <label for="attackBonus{{i}}">Attack Bonus</label>
+                  <input type="text" class="form-control" id="attackBonus{{i}}" aria-describedby="attackBonus"
+                    [formControlName]="i" #actionattackbonus (keyup)="getActionAttackBonus(i, actionattackbonus.value)">
+                </div>
+                <div class="col-2">
+                  <label for="damageDice{{i}}">Damage Dice</label>
+                  <input type="text" class="form-control" id="damageDice{{i}}" aria-describedby="damageDice"
+                    [formControlName]="i" #actiondamagedice (keyup)="getActionDamageDice(i,actiondamagedice.value)">
+                </div>
+                <div class="col-2">
+                  <label for="damageBonus{{i}}">Damage Bonus</label>
+                  <input type="text" class="form-control" id="damageBonus{{i}}" aria-describedby="damageBonus"
+                    [formControlName]="i" #actiondamagebonus (keyup)="getActionDamageBonus(i,actiondamagebonus.value)">
+                </div>
+                <div class="col-1">
+                  <button class="btn btn-dark btn-block btn-sm" (click)="removeAction(i)"><i
+                      class="fas fa-minus-square"></i></button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="action_description{{i}}">Description</label>
+                  <textarea class="form-control" id="action_description{{i}}" rows="3" [formControlName]="i"
+                    #actiondescription (keyup)="getActionDesc(i,actiondescription.value)">
+                                </textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Recations -->
+        <div class="row">
+          <div class="col">
+            <h2>REACTIONS</h2>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-dark btn-block btn-sm" (click)="addReaction()"><i
+                class="fas fa-plus-square"></i></button>
+          </div>
+        </div>
+        <div class="container">
+          <hr>
+        </div>
+        <div [formGroup]="reactionFG">
+          <div class="form-group">
+            <div formArrayName="extraReactions" *ngFor="let reaction of extraReactions.controls; let i = index"
+              class="mt-2">
+              <div class="row">
+                <div class="col">
+                  <label for="reaction_name{{i}}">Name</label>
+                  <input type="text" class="form-control" id="reaction_name{{i}}" aria-describedby="reaction_name"
+                    [formControlName]="i" #reactionname (keyup)="getReactionName(i, reactionname.value)">
+                </div>
+                <div class="col-1">
+                  <button class="btn btn-dark btn-block btn-sm" (click)="removeReaction(i)"><i
+                      class="fas fa-minus-square"></i></button>
+                </div>
+              </div>
+              <label for="reaction_description{{i}}">Description</label>
+              <textarea class="form-control" id="reaction_description{{i}}" rows="3" [formControlName]="i" #reactiondesc
+                (keyup)="getReactionDesc(i, reactiondesc.value)">
+                    </textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h2>LEGENDARY ACTIONS</h2>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-dark btn-block btn-sm" (click)="addLegendary()"><i
+                class="fas fa-plus-square"></i></button>
+          </div>
+        </div>
+        <div class="container">
+          <hr>
+        </div>
+        <div [formGroup]="legendaryFG">
+          <div class="form-group">
+            <div formArrayName="extraLegendary" *ngFor="let action of extraLegendary.controls; let i = index"
+              class="mt-2">
+              <div class="row">
+                <div class="col">
+                  <label for="legendary_name{{i}}">Name</label>
+                  <input type="text" class="form-control" id="legendary_name{{i}}" aria-describedby="legendary_name"
+                    [formControlName]="i" #legendaryname (keyup)="getLegendaryName(i, legendaryname.value)">
+                </div>
+                <div class="col-2">
+                  <label for="legendary_cost{{i}}">Point Cost</label>
+                  <input type="text" class="form-control" id="legendary_cost{{i}}" aria-describedby="legendary_cost"
+                    [formControlName]="i" #legendarycost (keyup)="getLegendaryCost(i, legendarycost.value)">
+                </div>
+                <div class="col-1">
+                  <button class="btn btn-dark btn-block btn-sm" (click)="removeLegendary(i)"><i
+                      class="fas fa-minus-square"></i></button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="legendary_description{{i}}">Description</label>
+                  <textarea class="form-control" id="legendary_description{{i}}" rows="3" [formControlName]="i"
+                    #legendarydesc (keyup)="getLegendaryDesc(i, legendarydesc.value)">
                   </textarea>
                 </div>
               </div>
-              <!-- Actions -->
-              <div class="row">
-                  <div class="col">
-                    <h2>ACTIONS</h2>
-                  </div>
-                  <div class="col-2">
-                      <button class="btn btn-dark btn-block btn-sm" (click)="addAction()"><i class="fas fa-plus-square"></i></button>
-                  </div>
-                </div>
-                <div class="container">
-                  <hr>
-                </div>
-                <div *ngFor="let action of actionsComponets; let i = index">
-                  <app-action-card [actionNo]="i" (removeAction)="removeAction($event)"></app-action-card>
-                </div>
-              <!-- Recations -->
-              <div class="row">
-                  <div class="col">
-                    <h2>REACTIONS</h2>
-                  </div>
-                  <div class="col-2">
-                      <button class="btn btn-dark btn-block btn-sm"(click)="addReaction()"><i class="fas fa-plus-square"></i></button>
-                  </div>
-                </div>
-                <div class="container">
-                  <hr>
-                </div>
-                <div *ngFor="let action of reactionsComponents; let i = index">
-                  <app-reaction-card [reactionNo]="i" (removeReaction)="removeReaction($event)"></app-reaction-card>
-                </div>
-              <!-- Legendary Actions -->
-              <div class="row">
-                  <div class="col">
-                    <h2>LEGENDARY ACTIONS</h2>
-                  </div>
-                  <div class="col-2">
-                      <button class="btn btn-dark btn-block btn-sm" (click)="addLegendary()"><i class="fas fa-plus-square"></i></button>
-                  </div>
-                </div>
-                <div class="container">
-                  <hr>
-                </div>
-                <div *ngFor="let action of legendaryComponets; let i = index">
-                  <app-legendary-card [legendaryNo]="i" (removeLegendary)="removeLegendary($event)"></app-legendary-card>
-                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Skills -->
+      <div class="col-3 border">
+        SKILLS
+        <div *ngFor="let skill of skillList">
+          {{skill.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+{{dummy | json}}
+
+
+
+<ng-template #addspeed let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="speedModalTitle">Add Speed</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <form>
+        <div class="form-group">
+          <div class="input-group input-group-lg">
+            <div class="row">
+              <div class="col-6">
+                <label for="speedDropdown">Movement Type</label>
+                <ng-multiselect-dropdown [placeholder]="' '" [data]="speedList" [settings]="speedDropdownSettings"
+                  name="speed" #speedName id="speedDropdown">
+                </ng-multiselect-dropdown>
               </div>
-              <!-- Skills -->
-              <div class="col-3 border">
-                SKILLS
+              <div class="col-6">
+                <label for="speedDistance">Distance</label>
+                <input class="form-control" type="number" id="speedDistance" #speedDistance>
               </div>
             </div>
-           </div>
-            <p></p>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="col">
-      {{monsterForm.value | json}}
-      <hr>
-      {{dummy | json}}
-      <br>
-      
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark"
+      (click)="modal.close(addSpeed(speedName.selectedItems[0].text, speedDistance.value))">Save</button>
   </div>
-</div>
+</ng-template>
+
+<ng-template #addsense let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="senseModalTitle">Add Senese</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <form>
+        <div class="form-group">
+          <div class="input-group input-group-lg">
+            <div class="row">
+              <div class="col-6">
+                <label for="senseDropdown">Sense</label>
+                <ng-multiselect-dropdown [placeholder]="' '" [data]="senseList" [settings]="senseDropdownSettings"
+                  name="sense" #senseName id="senseDropdown">
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="col-6">
+                <label for="senseDistance">Distance</label>
+                <input class="form-control" type="number" id="senseDistance" #senseDistance>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close(addSense(senseName.selectedItems[0].text, senseDistance.value))">Save</button>
+  </div>
+</ng-template>

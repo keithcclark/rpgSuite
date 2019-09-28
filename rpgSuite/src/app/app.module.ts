@@ -1,11 +1,12 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import {NgxExtendedPdfViewerModule} from 'ngx-extended-pdf-viewer';
-import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 
 
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { ActionCardComponent } from './monster/action-card/action-card.component
 import { ReactionCardComponent } from './monster/reaction-card/reaction-card.component';
 import { LegendaryCardComponent } from './monster/legendary-card/legendary-card.component';
 import { FractionsPipe } from './shared/pipes/fractions.pipe';
+import { ClickOutsideDirective } from './shared/directive/click-outside.directive';
 
 
 
@@ -46,12 +48,14 @@ import { FractionsPipe } from './shared/pipes/fractions.pipe';
     ActionCardComponent,
     ReactionCardComponent,
     LegendaryCardComponent,
-    FractionsPipe
+    FractionsPipe,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
     NgxExtendedPdfViewerModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AbstractControlDirective, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-trait-card',
@@ -7,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class TraitCardComponent implements OnInit {
   @Input() traitNo: Number;
+  @Input() control: AbstractControlDirective | AbstractControl;
   @Output() removeTrait = new EventEmitter<Number>();
 
   constructor() { }
