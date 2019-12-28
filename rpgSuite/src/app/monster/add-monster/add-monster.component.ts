@@ -32,6 +32,7 @@ import { CreatureType } from 'src/app/shared/classes/creature-type';
 import { Subtype } from 'src/app/shared/classes/subtype';
 import { SkillService } from 'src/app/shared/services/skill-service.service';
 import { SkillProf } from 'src/app/shared/classes/skill-prof';
+import { SavingThrows } from 'src/app/shared/classes/saving-throws';
 
 @Component({
   selector: 'app-add-monster',
@@ -157,6 +158,9 @@ export class AddMonsterComponent implements OnInit {
       this.skillList = skill;
     });
     this.initalizeDropdownSettings();
+  }
+  getMod(abilityScore: number) {
+    return Math.floor((abilityScore - 10) / 2);
   }
   // *****************
   // Add and remove speeds and senses
@@ -340,6 +344,86 @@ export class AddMonsterComponent implements OnInit {
   }
   // ************************
   // ************************
+  // skills
+  manageSkills(skill: Skill, checked: any) {
+    const tempSkill = new SkillProf;
+    let tempBonus = 0;
+    tempSkill.skills = skill;
+    if (checked.checked) {
+      switch (skill.main_stat) {
+        case 'Strength':
+          tempBonus = this.getMod(this.dummy.strength);
+          break;
+        case 'Dexterity':
+          tempBonus = this.getMod(this.dummy.dexterity);
+          break;
+        case 'Constitution':
+          tempBonus = this.getMod(this.dummy.constitution);
+          break;
+        case 'Intelligence':
+          tempBonus = this.getMod(this.dummy.intelligence);
+          break;
+        case 'Wisdom':
+          tempBonus = this.getMod(this.dummy.wisdom);
+          break;
+        case 'Charisma':
+          tempBonus = this.getMod(this.dummy.charisma);
+          break;
+      }
+      tempBonus += this.dummy.challenge_rating.prof_bonus;
+      tempSkill.bonus = tempBonus;
+      this.dummy.skills.push(tempSkill);
+    } else {
+      let i: number;
+      for (i = 0; i < this.dummy.skills.length; i++) {
+        if (this.dummy.skills[i].skills.name == tempSkill.skills.name) {
+          this.dummy.skills.splice(i);
+          break;
+        }
+      }
+    }
+  }
+  // saving throws
+  manageSavingThrows(save: string, checked: any) {
+    const tempSave = new SavingThrows;
+    tempSave.stat = save;
+    if (checked.checked) {
+      switch (save) {
+        case 'STR':
+          tempSave.modifier = this.getMod(this.dummy.strength) + this.dummy.challenge_rating.prof_bonus;
+          break;
+        case 'DEX':
+          tempSave.modifier = this.getMod(this.dummy.dexterity) + this.dummy.challenge_rating.prof_bonus;
+          break;
+        case 'CON':
+          tempSave.modifier = this.getMod(this.dummy.constitution) + this.dummy.challenge_rating.prof_bonus;
+          break;
+        case 'INT':
+          tempSave.modifier = this.getMod(this.dummy.intelligence) + this.dummy.challenge_rating.prof_bonus;
+          break;
+        case 'WIS':
+          tempSave.modifier = this.getMod(this.dummy.wisdom) + this.dummy.challenge_rating.prof_bonus;
+          break;
+        case 'CHR':
+          tempSave.modifier = this.getMod(this.dummy.charisma) + this.dummy.challenge_rating.prof_bonus;
+          break;
+      }
+      this.dummy.savingThrows.push(tempSave);
+    } else {
+      let i: number;
+      for (i = 0; i < this.dummy.savingThrows.length; i++) {
+        if (this.dummy.savingThrows[i].stat == tempSave.stat) {
+          this.dummy.savingThrows.splice(i);
+          break;
+        }
+      }
+    }
+
+  }
+  fillCR(prof: number, xp: number) {
+    this.dummy.challenge_rating.prof_bonus = prof;
+    this.dummy.challenge_rating.xp = xp;
+  }
 
   // set list of subtypes based on selected type
   getSubTypeList(id: any) {
@@ -459,6 +543,7 @@ export class AddMonsterComponent implements OnInit {
     this.dummy.damageResistance = new Array<DamageType>();
     this.dummy.damageImmunity = new Array<DamageType>();
     this.dummy.conditionImmunity = new Array<Condition>();
+    this.dummy.savingThrows = new Array<SavingThrows>();
     this.dummy.senses = new Array<Sense>();
     this.dummy.senses[0] = new Sense();
     this.dummy.senses[0].id = 0;

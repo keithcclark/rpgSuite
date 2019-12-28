@@ -1,6 +1,7 @@
 import { Skill } from './skill';
 
 export class SkillProf {
-    skill: Skill;
-    bonus: Number;
+    skills: Skill;
+    bonus: number;
+    id: Number;
 }

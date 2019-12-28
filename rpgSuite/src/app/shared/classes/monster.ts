@@ -10,6 +10,7 @@ import { Condition } from './condition';
 import { CreatureType } from './creature-type';
 import { Subtype } from './subtype';
 import { SkillProf } from './skill-prof';
+import { SavingThrows } from './saving-throws';
 
 export class Monster {
     // from the database
@@ -23,7 +24,7 @@ export class Monster {
     armor_class: number;
     hit_points: number;
     hit_dice: String;
-    savingThrows: [];
+    savingThrows = new Array<SavingThrows>();
     challenge_rating: ChallengeRating;
     creature_type: CreatureType;
     creature_subtype: Subtype;

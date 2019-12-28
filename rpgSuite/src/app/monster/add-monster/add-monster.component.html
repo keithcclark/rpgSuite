@@ -36,7 +36,7 @@
             placeholder="10">
           <!-- Strenght saving throw proficiency -->
           <div class="text-center">
-            <input type="checkbox" class="form-check-input" id="strSave">
+            <input type="checkbox" class="form-check-input" id="strSave" (change)="manageSavingThrows('STR',$event.srcElement)">
             <label class="form-check-label" for="strSave">Save</label>
           </div>
         </div>
@@ -47,7 +47,7 @@
             placeholder="10">
           <!-- Dexterity saving throw proficiency -->
           <div class="text-center">
-            <input type="checkbox" class="form-check-input" id="dexSave">
+            <input type="checkbox" class="form-check-input" id="dexSave" (change)="manageSavingThrows('DEX',$event.srcElement)">
             <label class="form-check-label" for="dexSave">Save</label>
           </div>
         </div>
@@ -58,7 +58,7 @@
             placeholder="10">
           <!-- Constitution saving throw proficiency -->
           <div class="text-center">
-            <input type="checkbox" class="form-check-input" id="conSave">
+            <input type="checkbox" class="form-check-input" id="conSave" (change)="manageSavingThrows('CON',$event.srcElement)">
             <label class="form-check-label" for="conSave">Save</label>
           </div>
         </div>
@@ -69,7 +69,7 @@
             placeholder="10">
           <!--  Intelligence saving throw proficiency -->
           <div class="text-center">
-            <input type="checkbox" class="form-check-input" id="intSave">
+            <input type="checkbox" class="form-check-input" id="intSave" (change)="manageSavingThrows('INT',$event.srcElement)">
             <label class="form-check-label" for="intSave">Save</label>
           </div>
         </div>
@@ -80,7 +80,7 @@
             placeholder="10">
           <!-- Wisdom saving throw proficiency -->
           <div class="text-center">
-            <input type="checkbox" class="form-check-input" id="wisSave">
+            <input type="checkbox" class="form-check-input" id="wisSave" (change)="manageSavingThrows('WIS',$event.srcElement)">
             <label class="form-check-label" for="wisSave">Save</label>
           </div>
         </div>
@@ -91,7 +91,7 @@
             placeholder="10">
           <!-- Charisma saving throw proficiency -->
           <div class="text-center">
-            <input type="checkbox" class="form-check-input" id="chrSave">
+            <input type="checkbox" class="form-check-input" id="chrSave" (change)="manageSavingThrows('CHR',$event.srcElement)">
             <label class="form-check-label" for="chrSave">Save</label>
           </div>
         </div>
@@ -128,7 +128,7 @@
           <label for="challenge_rating">Challenge Rating</label>
           <select [(ngModel)]="dummy.challenge_rating.cr" name="challenge_rating" class="form-control"
             id="challenge_rating">
-            <option *ngFor="let cr of crList" [value]="cr.cr">{{cr.cr | fractions}}</option>
+            <option *ngFor="let cr of crList" [value]="cr.cr" (click)="fillCR(cr.prof_bonus, cr.xp)">{{cr.cr | fractions}}</option>
           </select>
         </div>
         <!-- Monster Type -->
@@ -232,8 +232,8 @@
               <tr *ngFor="let speed of dummy.speeds; let i = index">
                 <td>{{speed.speed}}</td>
                 <td>
-                  <input type="number" disabled id="sValue{{i}}" (blur)="disableSvalue(i)"
-                    name="speed{{i}}" [(ngModel)]="dummy.speeds[i].distance">
+                  <input type="number" disabled id="sValue{{i}}" (blur)="disableSvalue(i)" name="speed{{i}}"
+                    [(ngModel)]="dummy.speeds[i].distance">
                 </td>
                 <td><a [routerLink]="none" (click)="enableSvalue(i)">Edit</a> | <a [routerLink]="none"
                     (click)="removeSpeed(i)">Delete</a></td>
@@ -263,8 +263,8 @@
               <tr *ngFor="let sense of dummy.senses; let i = index">
                 <td>{{sense.sense}}</td>
                 <td>
-                  <input type="number" disabled id="seValue{{i}}" (blur)="disableSeValue(i)"
-                    name="sense{{i}}" [(ngModel)]="dummy.senses[i].distance">
+                  <input type="number" disabled id="seValue{{i}}" (blur)="disableSeValue(i)" name="sense{{i}}"
+                    [(ngModel)]="dummy.senses[i].distance">
                 </td>
                 <td><a [routerLink]="none" (click)="enableSeValue(i)">Edit</a> | <a [routerLink]="none"
                     (click)="removeSense(i)">Delete</a></td>
@@ -453,7 +453,12 @@
       <div class="col-3 border">
         SKILLS
         <div *ngFor="let skill of skillList">
-          {{skill.name}}
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="{{skill.name}}" (change)="manageSkills(skill, $event.srcElement)">
+            <label class="form-check-label" for="{{skill.name}}">
+              {{skill.name}}
+            </label>
+          </div>
         </div>
       </div>
     </div>
@@ -529,6 +534,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close(addSense(senseName.selectedItems[0].text, senseDistance.value))">Save</button>
+    <button type="button" class="btn btn-outline-dark"
+      (click)="modal.close(addSense(senseName.selectedItems[0].text, senseDistance.value))">Save</button>
   </div>
 </ng-template>

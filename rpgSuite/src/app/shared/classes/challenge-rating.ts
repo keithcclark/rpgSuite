@@ -1,5 +1,5 @@
 export class ChallengeRating {
     cr: String;
-    xp: Number;
-    prof_bonus: Number;
+    xp: number;
+    prof_bonus: number;
 }
