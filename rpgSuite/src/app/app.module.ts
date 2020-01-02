@@ -27,6 +27,7 @@ import { ReactionCardComponent } from './monster/reaction-card/reaction-card.com
 import { LegendaryCardComponent } from './monster/legendary-card/legendary-card.component';
 import { FractionsPipe } from './shared/pipes/fractions.pipe';
 import { ClickOutsideDirective } from './shared/directive/click-outside.directive';
+import { LabComponent } from './lab/lab.component';
 
 
 
@@ -49,7 +50,8 @@ import { ClickOutsideDirective } from './shared/directive/click-outside.directiv
     ReactionCardComponent,
     LegendaryCardComponent,
     FractionsPipe,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    LabComponent
   ],
   imports: [
     BrowserModule,
